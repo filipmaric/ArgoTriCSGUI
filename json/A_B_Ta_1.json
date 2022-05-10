@@ -1,0 +1,40 @@
+[
+{type: "point", name: "A", construction: "free", params: [80, 95], color: "blue", intriangle: ["vertex", ["A"]]},
+{type: "point", name: "B", construction: "free", params: [20, 40], color: "blue", intriangle: ["vertex", ["B"]]},
+{type: "point", name: "T_{a}", construction: "free", params: [70.86, 40], color: "blue", intriangle: ["angle_bis_foot", ["A","B","C"]]},
+
+{type: "line", name: "c", construction: "W02",
+params: ["A","B"],
+props: [["not_eq_point", "A","B"] ,["inc", "A","c"] ,["inc", "B","c"] ],
+ndg: [], det: [["not_eq_point", "A","B"] ],
+lemmas: ["GD01"],
+intriangle: ["line", ["A","B"]]},
+
+{type: "line", name: "a", construction: "W02",
+params: ["B","T_{a}"],
+props: [["not_eq_point", "B","T_{a}"] ,["inc", "B","a"] ,["inc", "T_{a}","a"] ],
+ndg: [], det: [["not_eq_point", "B","T_{a}"] ],
+lemmas: ["GD01","D23"],
+intriangle: ["line", ["B","C"]]},
+
+{type: "circle", name: "k(T_{a},foot[T_{a},c])", construction: "W11",
+params: ["T_{a}","c"],
+props: [["perp_line_to_circ", "c","k(T_{a},foot[T_{a},c])"] ,["center", "T_{a}","k(T_{a},foot[T_{a},c])"] ],
+ndg: [["not_true", "inc(angle_bis_foot(a,[b,c]),line([a,b]))"] ], det: [],
+lemmas: ["GL10","L8","GD02"],
+intriangle: ["circle_center_through", ["T_{a}","foot[T_{a},c]"]]},
+
+{type: "line", name: "b", construction: "W13",
+params: ["k(T_{a},foot[T_{a},c])","A","T_{a}","c"],
+props: [["perp_line_to_circ", "b","k(T_{a},foot[T_{a},c])"] ,["perp_line_to_circ", "c","k(T_{a},foot[T_{a},c])"] ,["not_eq_line", "b","c"] ,["center", "T_{a}","k(T_{a},foot[T_{a},c])"] ,["inc", "A","b"] ,["inc", "A","c"] ],
+ndg: [["out_of_circle", "A","k(T_{a},foot[T_{a},c])"] ], det: [],
+lemmas: ["GL11","GL10","L8","GD02","GD01"],
+intriangle: ["line", ["A","C"]]},
+
+{type: "point", name: "C", construction: "W03",
+params: ["b","a"],
+props: [["not_eq_line", "b","a"] ,["inc", "C","b"] ,["inc", "C","a"] ],
+ndg: [["not_parallel", "b","a"] ], det: [["not_eq_line", "b","a"] ],
+lemmas: ["GD01"],
+intriangle: ["vertex", ["C"]]}
+]

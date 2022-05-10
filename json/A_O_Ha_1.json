@@ -1,0 +1,26 @@
+[
+{type: "point", name: "A", construction: "free", params: [80, 95], color: "blue", intriangle: ["vertex", ["A"]]},
+{type: "point", name: "O", construction: "free", params: [65, 51.14], color: "blue", intriangle: ["circumcenter", ["A","B","C"]]},
+{type: "point", name: "H_{a}", construction: "free", params: [80, 40], color: "blue", intriangle: ["foot", ["A","B","C"]]},
+
+{type: "line", name: "h_{a}", construction: "W02",
+params: ["A","H_{a}"],
+props: [["not_eq_point", "A","H_{a}"] ,["inc", "A","h_{a}"] ,["inc", "H_{a}","h_{a}"] ],
+ndg: [], det: [["not_eq_point", "A","H_{a}"] ],
+lemmas: ["D8","D5"],
+intriangle: ["altitude", ["A","B","C"]]},
+
+{type: "circle", name: "k(O,C)", construction: "W06",
+params: ["A","O"],
+props: [["center", "O","k(O,C)"] ,["inc_k", "A","k(O,C)"] ],
+ndg: [["not_eq_point", "A","O"] ], det: [],
+lemmas: ["D26","L11"],
+intriangle: ["circumcircle", ["A","B","C"]]},
+
+{type: "line", name: "a", construction: "W10a",
+params: ["H_{a}","h_{a}"],
+props: [["perp", "h_{a}","a"] ,["inc", "H_{a}","a"] ],
+ndg: [], det: [],
+lemmas: ["D8","D5"],
+ intriangle: ["line", ["B","C"]]}
+]

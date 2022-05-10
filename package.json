@@ -1,0 +1,20 @@
+{
+  "name": "ArgoTriCSGUI",
+  "version": "1.0.0",
+  "description": "A web GUI for automated triangle construction solver ArgoTriCS (http://argo.matf.bg.ac.rs)",
+  "main": "hints.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "private": true,
+  "keywords": [],
+  "author": "Filip Marić (filip@matf.bg.ac.rs) and Vesna Marinković (vesnap@matf.bg.ac.rs)",
+  "license": "ISC",
+  "dependencies": {
+    "ArgoDG": "git+https://github.com/filipmaric/ArgoDG.git"
+  },
+  "devDependencies": {
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2"
+  }
+}

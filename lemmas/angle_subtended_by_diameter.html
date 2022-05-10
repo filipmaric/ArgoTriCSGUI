@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Angle subtended by diameter</title>
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/filipmaric/ArgoDG/dist/DG.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/filipmaric/ArgoDG/dist/RC.js"></script>
+    
+    <link rel="stylesheet" href="lemmas.css" /> 
+    
+  </head>
+<body>
+  <h1>Angle subtended by diameter</h1>
+  <div id="figure">
+    <canvas id="mycanvas"></canvas>
+  </div>
+
+  
+  <div id="lemmas">
+    <div class="lemma">
+      <b>Lemma:</b> Every angle subtended by circle diameter is right angle.
+    </div>
+  </div>
+  
+  <script>
+    DG.setup("mycanvas", { width: 500, height: 500, border: "1px solid #ccc"}, 0, 120, 0, 120);
+
+    const A = RC.point(20, 60).color("black").label("M");
+    const B = RC.point(100, 60).color("black").label("N");
+    const O = RC.midpoint(A, B).label("O");
+    const c = RC.circle(O, A);
+    const X = RC.point(60, 100).label("X").validityCheck((x, y) => c.onCircleXY(x, y));
+    const AX = RC.segment(A, X);
+    const BX = RC.segment(B, X);
+    const AB = RC.segment(A, B);
+  </script>
+</body>
+</html>

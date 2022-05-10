@@ -1,0 +1,108 @@
+<html>
+  <head>
+    <title>Angle bisector feet</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>    
+
+    <script src="https://cdn.jsdelivr.net/gh/filipmaric/ArgoDG/dist/DG.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/filipmaric/ArgoDG/dist/RC.js"></script>
+    
+    <link rel="stylesheet" href="lemmas.css" /> 
+    
+  </head>
+<body>
+  <h1>Angle bisector feet</h1>
+
+  <div id="figure">
+    <canvas id="mycanvas"></canvas>
+  </div>
+
+  <div id="lemmas">
+    <!--- D23, D24, D25 --->
+    <div class="lemma">
+      <b>Proposition:</b> 
+      <ul>
+        <li>Foot \(T_a\) of angle bisector \(t_a\) is its intersection
+          with the side \(a\).
+        <li>Foot \(T_b\) of angle bisector \(t_b\) is its intersection
+          with the side \(b\).
+        <li>Foot \(T_c\) of angle bisector \(t_c\) is its intersection
+          with the side \(c\).
+        </li>
+    </div>    
+
+    <!--- L8, L9, L10 --->
+    <div class="lemma">
+      <b>Proposition:</b> 
+      <ul>
+        <li>Distance from angle foot \(T_a\) to side \(b\) is equal to
+          distance from \(T_a\) to side \(c\).
+        <li>Distance from angle foot \(T_b\) to side \(c\) is equal to
+          distance from \(T_b\) to side \(a\).
+        <li>Distance from angle foot \(T_c\) to side \(a\) is equal to
+          distance from \(T_b\) to side \(b\).
+      </ul>
+    </div>
+
+    <!--- L28, L29, L30 --->
+    <div class="lemma">
+      <b>Proposition:</b> 
+      <ul>
+        <li>Sides b and c are tangent to the circle centered at angle
+          bisector foot \(T_a\) that contains projections \(T_{ab}\)
+          and \(T_{ac}\) of the point \(T_a\) onto sides \(b\) and \(c\).
+        <li>Sides a and c are tangent to the circle centered at angle
+          bisector foot \(T_b\) that contains projections \(T_{ba}\)
+          and \(T_{bc}\) of the point \(T_b\) onto sides \(a\) and \(c\).
+        <li>Sides a and b are tangent to the circle centered at angle
+          bisector foot \(T_c\) that contains projections \(T_{ca}\)
+          and \(T_{cb}\) of the point \(T_c\) onto sides \(a\) and \(b\).
+      </ul>
+    </div>
+    
+  </div>
+
+  <script>
+    DG.setup("mycanvas", { width: 500, height: 500, border: "1px solid #ccc"}, 0, 120, 0, 120);
+
+    const A = RC.point(75, 95).color("black").label("A");
+    const B = RC.point(15, 40).color("black").label("B");
+    const C = RC.point(105, 40).color("black").label("C");
+
+    const AB = RC.segment(A, B).color("black").width(2);
+    const BC = RC.segment(B, C).color("black").width(2);
+    const AC = RC.segment(A, C).color("black").width(2);
+
+    const a = RC.line(B, C).label("a").color("black").width(0.5);
+    const b = RC.line(A, C).label("b").color("black").width(0.5);
+    const c = RC.line(A, B).label("c").color("black").width(0.5);
+    
+    const ta = RC.angle_bisector(B, A, C).color("orange").label("t_{a}"); 
+    const tb = RC.angle_bisector(A, B, C).color("orange").label("t_{b}"); 
+    const tc = RC.angle_bisector(B, C, A).color("orange").label("t_{c}");
+    const I = RC.intersectLL(ta, tb).color("orange").label("I");
+    
+    const Ta = RC.intersectLL(ta, a).color("orange").label("T_{a}");
+    const Tb = RC.intersectLL(tb, b).color("orange").label("T_{b}");
+    const Tc = RC.intersectLL(tc, c).color("orange").label("T_{c}");
+
+    const Ta_b = RC.foot(b, Ta).color("Olive").label("T_{ab}");
+    const Ta_c = RC.foot(c, Ta).color("Olive").label("T_{ac}");
+    const Ta_Ta_b = RC.segment(Ta, Ta_b).color("Olive").dashed();
+    const Ta_Ta_c = RC.segment(Ta, Ta_c).color("Olive").dashed();
+    const cTa = RC.circle(Ta, Ta_b).color("Olive").dashed().width(1.5);
+
+    const Tb_a = RC.foot(a, Tb).color("DarkCyan").label("T_{ba}");
+    const Tb_c = RC.foot(c, Tb).color("DarkCyan").label("T_{bc}");
+    const Tb_Tb_a = RC.segment(Tb, Tb_a).color("DarkCyan").dashed();
+    const Tb_Tb_c = RC.segment(Tb, Tb_c).color("DarkCyan").dashed();
+    const cTb = RC.circle(Tb, Tb_a).color("DarkCyan").dashed().width(1.5);
+
+    const Tc_a = RC.foot(a, Tc).color("LimeGreen").label("T_{ca}");
+    const Tc_b = RC.foot(b, Tc).color("LimeGreen").label("T_{cb}");
+    const Tc_Tc_a = RC.segment(Tc, Tc_a).color("LimeGreen").dashed();
+    const Tc_Tc_b = RC.segment(Tc, Tc_b).color("LimeGreen").dashed();
+    const cTc = RC.circle(Tc, Tc_a).color("LimeGreen").dashed().width(1.5);    
+  </script>
+</body>
+</html>

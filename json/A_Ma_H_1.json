@@ -1,0 +1,307 @@
+[
+   {
+      "type": "point",
+      "name": "A",
+      "construction": "free",
+      "params": [
+         80,
+         95
+      ],
+      "color": "red",
+      "intriangle": [
+         "vertex",
+         [
+            "A"
+         ]
+      ]
+   },
+   {
+      "type": "point",
+      "name": "M_{a}",
+      "construction": "free",
+      "params": [
+         65,
+         40
+      ],
+      "color": "red",
+      "intriangle": [
+         "midpoint",
+         [
+            "B",
+            "C"
+         ]
+      ]
+   },
+   {
+      "type": "point",
+      "name": "H",
+      "construction": "free",
+      "params": [
+         80,
+         72.73
+      ],
+      "color": "red",
+      "intriangle": [
+         "orthocenter",
+         [
+            "A",
+            "B",
+            "C"
+         ]
+      ]
+   },
+   {
+      "type": "point",
+      "name": [
+         "sym(h)_{a}"
+      ],
+      "construction": "W01",
+      "params": [
+         "M_{a}",
+         "M_{a}",
+         "H",
+         -1,
+         1
+      ],
+      "props": [
+         [
+            "sratio",
+            "sym(h)_{a}",
+            "M_{a}",
+            "H",
+            "-1",
+            "1"
+         ]
+      ],
+      "ndg": [],
+      "det": [],
+      "lemmas": [
+         "GL04",
+         "D94"
+      ],
+      "intriangle": [
+         "vertex",
+         [
+            "A"
+         ]
+      ]
+   },
+   {
+      "type": "point",
+      "name": [
+         "O"
+      ],
+      "construction": "W01",
+      "params": [
+         "A",
+         "A",
+         "sym(h)_{a}",
+         1,
+         2
+      ],
+      "props": [
+         [
+            "sratio",
+            "O",
+            "A",
+            "sym(h)_{a}",
+            "1",
+            "2"
+         ]
+      ],
+      "ndg": [],
+      "det": [],
+      "lemmas": [
+         "GL03",
+         "L126"
+      ],
+      "intriangle": [
+         "vertex",
+         [
+            "A"
+         ]
+      ]
+   },
+   {
+      "type": "line",
+      "name": [
+         "h_{a}"
+      ],
+      "construction": "W02",
+      "params": [
+         "A",
+         "H"
+      ],
+      "props": [
+         [
+            "not_eq_point",
+            "A",
+            "H"
+         ],
+         [
+            "inc",
+            "A",
+            "h_{a}"
+         ],
+         [
+            "inc",
+            "H",
+            "h_{a}"
+         ]
+      ],
+      "ndg": [],
+      "det": [
+         [
+            "not_eq_point",
+            "A",
+            "H"
+         ]
+      ],
+      "lemmas": [
+         "D8",
+         "D3"
+      ],
+      "intriangle": [
+         "vertex",
+         [
+            "A"
+         ]
+      ]
+   },
+   {
+      "type": "circle",
+      "name": [
+         "k(O,C)"
+      ],
+      "construction": "W06",
+      "params": [
+         "A",
+         "O"
+      ],
+      "props": [
+         [
+            "center",
+            "O",
+            "k(O,C)"
+         ],
+         [
+            "inc_k",
+            "A",
+            "k(O,C)"
+         ]
+      ],
+      "ndg": [
+         [
+            "not_eq_point",
+            "A",
+            "O"
+         ]
+      ],
+      "det": [],
+      "lemmas": [
+         "D26",
+         "L11"
+      ],
+      "intriangle": [
+         "vertex",
+         [
+            "A"
+         ]
+      ]
+   },
+   {
+      "type": "line",
+      "name": [
+         "a"
+      ],
+      "construction": "W10a",
+      "params": [
+         "M_{a}",
+         "h_{a}"
+      ],
+      "props": [
+         [
+            "perp",
+            "h_{a}",
+            "a"
+         ],
+         [
+            "inc",
+            "M_{a}",
+            "a"
+         ]
+      ],
+      "ndg": [],
+      "det": [],
+      "lemmas": [
+         "D8",
+         "GL09",
+         "D21",
+         "GD01"
+      ],
+      "intriangle": [
+         "vertex",
+         [
+            "A"
+         ]
+      ]
+   },
+   {
+      "type": "point",
+      "name": [
+         "C",
+         "B"
+      ],
+      "construction": "W04",
+      "params": [
+         "k(O,C)",
+         "a"
+      ],
+      "props": [
+         [
+            "inc_k",
+            "C",
+            "k(O,C)"
+         ],
+         [
+            "inc_k",
+            "B",
+            "k(O,C)"
+         ],
+         [
+            "not_eq_point",
+            "C",
+            "B"
+         ],
+         [
+            "inc",
+            "C",
+            "a"
+         ],
+         [
+            "inc",
+            "B",
+            "a"
+         ]
+      ],
+      "ndg": [
+         [
+            "intersect_line_circle",
+            "a",
+            "k(O,C)"
+         ]
+      ],
+      "det": [],
+      "lemmas": [
+         "D26",
+         "L12",
+         "GD01"
+      ],
+      "intriangle": [
+         "vertex",
+         [
+            "A"
+         ]
+      ]
+   }
+]

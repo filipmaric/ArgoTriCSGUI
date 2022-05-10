@@ -1,0 +1,47 @@
+[
+{type: "point", name: "A", construction: "free", params: [80, 95], color: "blue", intriangle: ["vertex", ["A"]]},
+{type: "point", name: "B", construction: "free", params: [20, 40], color: "blue", intriangle: ["vertex", ["B"]]},
+{type: "point", name: "I", construction: "free", params: [74.37, 61.15], color: "blue", intriangle: ["incenter", ["A","B","C"]]},
+
+{type: "line", name: "m_{c}", construction: "W14",
+params: ["A","B"],
+props: [],
+ndg: [], det: [["not_eq_point", "A","B"] ],
+lemmas: [],
+intriangle: ["side_bis", ["A","B"]]},
+
+{type: "line", name: "c", construction: "W10a",
+params: ["A","m_{c}"],
+props: [["perp", "m_{c}","c"] ,["inc", "A","c"] ],
+ndg: [], det: [],
+lemmas: ["D13","GD01"],
+intriangle: ["line", ["A","B"]]},
+
+{type: "circle", name: "k(I,P_{a})", construction: "W11",
+params: ["I","c"],
+props: [["perp_line_to_circ", "c","k(I,P_{a})"] ,["center", "I","k(I,P_{a})"] ],
+ndg: [["not_true", "inc(incenter([a,b],c),line([a,b]))"] ], det: [],
+lemmas: ["L59","D27"],
+intriangle: ["incircle", ["A","B","C"]]},
+
+{type: "line", name: "b", construction: "W13",
+params: ["k(I,P_{a})","A","I","c"],
+props: [["perp_line_to_circ", "b","k(I,P_{a})"] ,["perp_line_to_circ", "c","k(I,P_{a})"] ,["not_eq_line", "b","c"] ,["center", "I","k(I,P_{a})"] ,["inc", "A","b"] ,["inc", "A","c"] ],
+ndg: [["out_of_circle", "A","k(I,P_{a})"] ], det: [],
+lemmas: ["L61","L59","D27","GD01"],
+intriangle: ["line", ["A","C"]]},
+
+{type: "line", name: "a", construction: "W13",
+params: ["k(I,P_{a})","B","I","c"],
+props: [["perp_line_to_circ", "a","k(I,P_{a})"] ,["perp_line_to_circ", "c","k(I,P_{a})"] ,["not_eq_line", "a","c"] ,["center", "I","k(I,P_{a})"] ,["inc", "B","a"] ,["inc", "B","c"] ],
+ndg: [["out_of_circle", "B","k(I,P_{a})"] ], det: [],
+lemmas: ["L60","L59","D27","GD01"],
+intriangle: ["line", ["B","C"]]},
+
+{type: "point", name: "C", construction: "W03",
+params: ["a","b"],
+props: [["not_eq_line", "a","b"] ,["inc", "C","a"] ,["inc", "C","b"] ],
+ndg: [["not_parallel", "a","b"] ], det: [["not_eq_line", "a","b"] ],
+lemmas: ["GD01"],
+intriangle: ["vertex", ["C"]]}
+]

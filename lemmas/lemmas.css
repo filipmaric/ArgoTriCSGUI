@@ -1,0 +1,23 @@
+div.lemma {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+}
+
+.lemma ul {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+
+div#figure {
+    width: 600px;
+    float: left;
+}
+div#lemmas {
+    margin-left: 650px;
+}
+
+div#container {
+    width: 100%;
+}

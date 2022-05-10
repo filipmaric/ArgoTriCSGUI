@@ -1,0 +1,101 @@
+<html>
+  <head>
+    <title>Incenter</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/filipmaric/ArgoDG/dist/DG.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/filipmaric/ArgoDG/dist/RC.js"></script>
+    
+    <link rel="stylesheet" href="lemmas.css" /> 
+  </head>
+<body>
+  <h1>Incenter</h1>
+
+  <div id="figure">
+    <canvas id="mycanvas"></canvas>
+  </div>
+
+  <div id="lemmas">
+    <!--- L5, L6, L7 --->
+    <div class="lemma">
+      <b>Proposition:</b>
+      <ul>
+        <li>Angle bisector \(t_a\) contains vertex \(A\).
+        <li>Angle bisector \(t_b\) contains vertex \(B\).
+        <li>Angle bisector \(t_c\) contains vertex \(C\).
+      </ul>
+    </div>
+    
+    <!--- D2, L2 --->
+    <div class="lemma">
+      <b>Proposition:</b> All three angle bisectors \(t_a\), \(t_b\), and \(t_c\) meet in a single point (incenter \(I\)).
+    </div>
+
+    <!--- D14, D15, D16 --->
+    <div class="lemma">
+      <b>Proposition:</b> 
+      <ul>
+        <li>Angle between side \(c\) and angle bisector
+        \(t_a\) is equal to angle between angle bisector \(t_a\) and
+        side \(b\).
+        <li>Angle between side \(a\) and angle bisector
+        \(t_b\) is equal to angle between angle bisector \(t_b\) and
+        side \(c\).
+        <li>Angle between side \(b\) and angle bisector
+        \(t_c\) is equal to angle between angle bisector \(t_c\) and
+        side \(a\).
+      </ul>
+    </div>
+
+    <!--- D27, L13, L14 --->
+    <div class="lemma">
+      <b>Proposition:</b> Incircle \(i\) is the circle centered at the
+      incenter \(I\) that contains feet \(T'_a\), \(T'_b\), and \(T'_c\)
+      of normals from incenter \(I\) onto sides \(a\), \(b\), and
+      \(c\).
+    </div>
+
+    <!--- L59, L60, L61 --->
+    <div class="lemma">
+      <b>Proposition:</b> All three sides of the triangle \(a\), \(b\)
+      and \(c\) are tangent to incenter \(i\).
+    </div>
+    
+  </div>
+
+
+  <script>
+    DG.setup("mycanvas", { width: 500, height: 500, border: "1px solid #ccc"}, 0, 120, 0, 120);
+
+    const A = RC.point(75, 95).color("black").label("A");
+    const B = RC.point(15, 40).color("black").label("B");
+    const C = RC.point(105, 40).color("black").label("C");
+
+    const AB = RC.segment(A, B).color("black").width(2);
+    const BC = RC.segment(B, C).color("black").width(2);
+    const AC = RC.segment(A, C).color("black").width(2);
+
+    const a = RC.line(B, C).label("a").color("black").width(0.5);
+    const b = RC.line(A, C).label("b").color("black").width(0.5);
+    const c = RC.line(A, B).label("c").color("black").width(0.5);
+    
+    const ta = RC.angle_bisector(B, A, C).color("orange").label("t_{a}"); 
+    const tb = RC.angle_bisector(A, B, C).color("orange").label("t_{b}"); 
+    const tc = RC.angle_bisector(B, C, A).color("orange").label("t_{c}");
+    const I = RC.intersectLL(ta, tb).color("orange").label("I");
+
+    const tpa = RC.drop_perp(a, I).color("Chocolate").label("t'_{a}").dashed();
+    const tpb = RC.drop_perp(b, I).color("Chocolate").label("t'_{b}").dashed();
+    const tpc = RC.drop_perp(c, I).color("Chocolate").label("t'_{c}").dashed();
+    const Tpa = RC.intersectLL(tpa, a).color("Chocolate").label("T'_{a}");
+    const Tpb = RC.intersectLL(tpb, b).color("Chocolate").label("T'_{b}");
+    const Tpc = RC.intersectLL(tpc, c).color("Chocolate").label("T'_{c}");
+    const ITpa = RC.segment(I, Tpa).color("Chocolate").width(1.5);
+    const ITpb = RC.segment(I, Tpb).color("Chocolate").width(1.5);
+    const ITpc = RC.segment(I, Tpc).color("Chocolate").width(1.5);
+
+    const i = RC.circle(I, Tpa).color("orange").label("i");
+  </script>
+</body>
+</html>

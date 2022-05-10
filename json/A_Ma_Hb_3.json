@@ -1,0 +1,261 @@
+[
+   {
+      "type": "point",
+      "name": "A",
+      "construction": "free",
+      "params": [
+         80,
+         95
+      ],
+      "color": "blue",
+      "intriangle": [
+         "vertex",
+         [
+            "A"
+         ]
+      ]
+   },
+   {
+      "type": "point",
+      "name": "M_{a}",
+      "construction": "free",
+      "params": [
+         65,
+         40
+      ],
+      "color": "blue",
+      "intriangle": [
+         "midpoint",
+         [
+            "B",
+            "C"
+         ]
+      ]
+   },
+   {
+      "type": "point",
+      "name": "H_{b}",
+      "construction": "free",
+      "params": [
+         89.36,
+         77.83
+      ],
+      "color": "blue",
+      "intriangle": [
+         "foot",
+         [
+            "B",
+            "A",
+            "C"
+         ]
+      ]
+   },
+   {
+      "type": "circle",
+      "name": "k(M_{a},B)",
+      "construction": "W06",
+      "params": [
+         "H_{b}",
+         "M_{a}"
+      ],
+      "props": [
+         [
+            "center",
+            "M_{a}",
+            "k(M_{a},B)"
+         ],
+         [
+            "inc_k",
+            "H_{b}",
+            "k(M_{a},B)"
+         ]
+      ],
+      "ndg": [
+         [
+            "not_eq_point",
+            "H_{b}",
+            "M_{a}"
+         ]
+      ],
+      "det": [],
+      "lemmas": [
+         "GD02",
+         "L38"
+      ],
+      "intriangle": [
+         "circle_center_through",
+         [
+            "M_{a}",
+            "B"
+         ]
+      ]
+   },
+   {
+      "type": "line",
+      "name": "m(AH_{b})",
+      "construction": "W14",
+      "params": [
+         "A",
+         "H_{b}"
+      ],
+      "props": [],
+      "ndg": [],
+      "det": [
+         [
+            "not_eq_point",
+            "A",
+            "H_{b}"
+         ]
+      ],
+      "lemmas": [],
+      "intriangle": [
+         "side_bis",
+         [
+            "A",
+            "H_{b}"
+         ]
+      ]
+   },
+   {
+      "type": "line",
+      "name": "h_{b}",
+      "construction": "W16",
+      "params": [
+         "H_{b}",
+         "m(AH_{b})"
+      ],
+      "props": [
+         [
+            "inc",
+            "H_{b}",
+            "h_{b}"
+         ],
+         [
+            "parallel",
+            "m(AH_{b})",
+            "h_{b}"
+         ]
+      ],
+      "ndg": [],
+      "det": [],
+      "lemmas": [
+         "D6"
+      ],
+      "intriangle": [
+         "altitude",
+         [
+            "B",
+            "A",
+            "C"
+         ]
+      ]
+   },
+   {
+      "type": "point",
+      "name": "B",
+      "construction": "W05",
+      "params": [
+         "k(M_{a},B)",
+         "h_{b}",
+         "M_{a}",
+         "H_{b}"
+      ],
+      "props": [
+         [
+            "center",
+            "M_{a}",
+            "k(M_{a},B)"
+         ],
+         [
+            "inc_k",
+            "H_{b}",
+            "k(M_{a},B)"
+         ],
+         [
+            "inc_k",
+            "B",
+            "k(M_{a},B)"
+         ],
+         [
+            "not_eq_point",
+            "H_{b}",
+            "B"
+         ],
+         [
+            "inc",
+            "H_{b}",
+            "h_{b}"
+         ],
+         [
+            "inc",
+            "B",
+            "h_{b}"
+         ],
+         [
+            "not_true",
+            "inc(midpoint([b,c]),altitude(b,[a,c]))"
+         ]
+      ],
+      "ndg": [
+         [
+            "intersect_line_circle",
+            "h_{b}",
+            "k(M_{a},B)"
+         ]
+      ],
+      "det": [
+         [
+            "not_eq_point",
+            "H_{b}",
+            "B"
+         ]
+      ],
+      "lemmas": [
+         "L38",
+         "GD02",
+         "D6",
+         "D9"
+      ],
+      "intriangle": [
+         "vertex",
+         [
+            "B"
+         ]
+      ]
+   },
+   {
+      "type": "point",
+      "name": "C",
+      "construction": "W01",
+      "params": [
+         "M_{a}",
+         "M_{a}",
+         "B",
+         -1,
+         1
+      ],
+      "props": [
+         [
+            "sratio",
+            "C",
+            "M_{a}",
+            "B",
+            "-1",
+            "1"
+         ]
+      ],
+      "ndg": [],
+      "det": [],
+      "lemmas": [
+         "GL04",
+         "GL03",
+         "D21"
+      ],
+      "intriangle": [
+         "vertex",
+         [
+            "C"
+         ]
+      ]
+   }
+]

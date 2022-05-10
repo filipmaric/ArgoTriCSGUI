@@ -1,0 +1,99 @@
+<html>
+  <head>
+    <title>Centroid</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/filipmaric/ArgoDG/dist/DG.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/filipmaric/ArgoDG/dist/RC.js"></script>
+    
+    <link rel="stylesheet" href="lemmas.css" /> 
+  </head>
+<body>
+  <h1>Centroid</h1>
+
+  <div id="figure">
+    <canvas id="mycanvas"></canvas>
+  </div>
+
+
+  <div id="lemmas">
+    <!--- D4, L4 --->
+    <div class="lemma">
+      <b>Proposition:</b> All three medians \(m_a\), \(m_b\), and \(m_c\) meet in a single point (centroid \(G\))
+    </div>
+
+    <!--- D20, D21, D22 --->
+    <div class="lemma">
+      <b>Proposition:</b>
+      <ul>
+        <li>\(M_a\) is the midpoint of segment \(BC\).
+        <li>\(M_b\) is the midpoint of segment \(AC\).
+        <li>\(M_c\) is the midpoint of segment \(AB\).
+      </ul>
+    </div>
+    
+    <!--- D17, D18, D19 --->
+    <div class="lemma">
+      <b>Proposition:</b>
+      <ul>
+        <li>Median \(m_a\) joins vertex \(A\) and midpoint \(M_a\) of
+        segment \(BC\).
+        <li>Median \(m_b\) joins vertex \(B\) and midpoint \(M_b\) of
+        segment \(AC\).
+        <li>Median \(m_c\) joins vertex \(C\) and midpoint \(M_c\) of
+        segment \(AB\).
+      </ul>
+    </div>
+
+    <!--- L55, L56, L57 --->
+    <div class="lemma">
+      <b>Proposition:</b>
+      <ul>
+        <li>Centroid \(G\) divides median \(AM_a\) in 2:3 ratio (\(AG\): \(AM_a\) = 2:3).
+        <li>Centroid \(G\) divides median \(BM_b\) in 2:3 ratio (\(BG\): \(BM_b\) = 2:3).
+        <li>Centroid \(G\) divides median \(CM_c\) in 2:3 ratio (\(CG\): \(CM_c\) = 2:3).
+      </ul>
+    </div>
+
+    <!--- L68, L69, L70 --->
+    <div class="lemma">
+      <b>Proposition:</b>
+      <ul>
+        <li>Line \(M_bM_c\) is paralel to side \(a\)
+        <li>Line \(M_aM_c\) is paralel to side \(b\)
+        <li>Line \(M_aM_b\) is paralel to side \(c\)
+      </ul>
+    </div>
+  </div>
+  
+  
+  <script>
+    DG.setup("mycanvas", { width: 500, height: 500, border: "1px solid #ccc"}, 0, 120, 0, 120);
+
+    const A = RC.point(80, 95).color("blue").label("A");
+    const B = RC.point(20, 40).color("blue").label("B");
+    const C = RC.point(100, 40).color("blue").label("C");
+
+    const AB = RC.segment(A, B).color("red").width(2);
+    const BC = RC.segment(B, C).color("red").width(2);
+    const AC = RC.segment(A, C).color("red").width(2);
+
+    const a = RC.line(B, C).label("a").hide();
+    const b = RC.line(A, C).label("b").hide();
+    const c = RC.line(A, B).label("c").hide();
+    
+    const Ma = RC.midpoint(B, C).color("green").label("M_{a}");
+    const Mb = RC.midpoint(A, C).color("green").label("M_{b}");
+    const Mc = RC.midpoint(A, B).color("green").label("M_{c}");
+    const ma = RC.line(A, Ma).color("green").label("m_{a}");
+    const mb = RC.line(B, Mb).color("green").label("m_{b}");
+    const mc = RC.line(C, Mc).color("green").label("m_{c}");
+    const G = RC.intersectLL(ma, mb).color("green").label("G");
+
+    const MaMb = RC.line(Ma, Mb).color("DarkTurquoise").dashed()
+    const MaMc = RC.line(Ma, Mc).color("DarkTurquoise").dashed()
+    const MbMc = RC.line(Mb, Mc).color("DarkTurquoise").dashed()
+  </script>
+</body>
+</html>

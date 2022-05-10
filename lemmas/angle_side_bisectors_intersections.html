@@ -1,0 +1,87 @@
+<html>
+  <head>
+    <title>Angle and side bisector intersections</title>
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>    
+
+    <script src="https://cdn.jsdelivr.net/gh/filipmaric/ArgoDG/dist/DG.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/filipmaric/ArgoDG/dist/RC.js"></script>
+    
+    <link rel="stylesheet" href="lemmas.css" /> 
+  </head>
+<body>
+  <h1>Angle and side bisector intersections</h1>
+  
+  <div id="figure">
+    <canvas id="mycanvas"></canvas>
+  </div>
+  
+  <div id="lemmas">
+    <!--- D47, D48, D49, L25, L26, L27 --->
+    <div class="lemma">
+      <b>Proposition:</b>
+      <ul>
+        <li>Intersection \(N_a\) of angle bisector \(t_a\) and side
+          bisector \(b_a\) lies on the circumcircle \(o\).
+        <li>Intersection \(N_b\) of angle bisector \(t_b\) and side
+          bisector \(b_b\) lies on the circumcircle \(o\).
+        <li>Intersection \(N_c\) of angle bisector \(t_c\) and side
+          bisector \(b_c\) lies on the circumcircle \(o\).
+      </ul>
+    </div>
+    <!--- L31, L32, L33, L34, L35, L36 --->
+    <div class="lemma">
+      <b>Proposition:</b>
+      <ul>
+        <li>Circle centered at \(N_a\) containing \(I\) also contains
+          vertices \(B\) and \(C\).
+        <li>Circle centered at \(N_b\) containing \(I\) also contains
+          vertices \(A\) and \(C\).
+        <li>Circle centered at \(N_c\) containing \(I\) also contains
+          vertices \(A\) and \(B\).
+      </ul>
+    </div>
+
+  </div>
+  
+  <script>
+    DG.setup("mycanvas", { width: 500, height: 500, border: "1px solid #ccc"}, 0, 120, 0, 120);
+
+    const A = RC.point(80, 85).color("black").label("A");
+    const B = RC.point(20, 40).color("black").label("B");
+    const C = RC.point(100, 40).color("black").label("C");
+
+    const AB = RC.segment(A, B).color("black").width(2);
+    const BC = RC.segment(B, C).color("black").width(2);
+    const AC = RC.segment(A, C).color("black").width(2);
+
+    const a = RC.line(B, C).label("a").color("black").width(0.5);
+    const b = RC.line(A, C).label("b").color("black").width(0.5);
+    const c = RC.line(A, B).label("c").color("black").width(0.5);
+
+    const ba = RC.bisector(B, C).color("blue").label("b_{a}");
+    const bb = RC.bisector(A, C).color("blue").label("b_{b}");
+    const bc = RC.bisector(A, B).color("blue").label("b_{c}");
+    const O = RC.intersectLL(ba, bb).color("blue").label("O");
+    const o = RC.circle(O, A).color("blue");
+
+
+    const ta = RC.angle_bisector(B, A, C).color("orange").label("t_{a}"); 
+    const tb = RC.angle_bisector(A, B, C).color("orange").label("t_{b}"); 
+    const tc = RC.angle_bisector(B, C, A).color("orange").label("t_{c}");
+    const I = RC.intersectLL(ta, tb).color("orange").label("I");
+    const Tpa = RC.foot(a, I).hide();
+    const i = RC.circle(I, Tpa).color("orange").label("i");
+
+
+    const Na = RC.intersectLL(ba, ta).label("N_{a}").color("DeepPink");
+    const Nb = RC.intersectLL(bb, tb).label("N_{b}").color("DeepPink");
+    const Nc = RC.intersectLL(bc, tc).label("N_{c}").color("DeepPink");
+
+    const cNaI = RC.circle(Na, I).color("DeepPink").width(1.5);
+    const cNbI = RC.circle(Nb, I).color("DeepPink").width(1.5);
+    const cNcI = RC.circle(Nc, I).color("DeepPink").width(1.5);    
+  </script>
+</body>
+</html>

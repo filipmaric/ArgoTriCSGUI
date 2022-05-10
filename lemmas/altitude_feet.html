@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <title>Altitude feet</title>
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>    
+
+    <script src="https://cdn.jsdelivr.net/gh/filipmaric/ArgoDG/dist/DG.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/filipmaric/ArgoDG/dist/RC.js"></script>
+    
+    <link rel="stylesheet" href="lemmas.css" /> 
+  </head>
+<body>
+  <h1>Altitude feet</h1>
+  
+  <div id="figure">
+    <canvas id="mycanvas"></canvas>
+  </div>
+  
+  <div id="lemmas">
+    <!--- L37, L38, L39, L40, L41, L42, L43, L44, L45 --->
+    <div class="lemma"><b>Proposition:</b>
+      <ul>
+        <li>Altitude feet \(H_b\) and \(H_c\) belong to the circle
+        over segment \(BC\) i.e., the circle centered at midpoint
+        \(M_a\) of the segment \(BC\), that contains \(B\) and \(C\).
+        <li>Altitude feet \(H_a\) and \(H_c\) belong to the circle
+        over segment \(AC\) i.e., the circle centered at midpoint
+        \(M_b\) of the segment \(AC\), that contains \(A\) and \(C\).
+        <li>Altitude feet \(H_b\) and \(H_c\) belong to the circle
+        over segment \(BC\) i.e., the circle centered at midpoint
+        \(M_b\) of the segment \(BC\), that contains \(B\) and \(C\).
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    DG.setup("mycanvas", { width: 500, height: 500, border: "1px solid #ccc"}, 0, 120, 0, 120);
+
+    const A = RC.point(80, 95).color("black").label("A");
+    const B = RC.point(20, 40).color("black").label("B");
+    const C = RC.point(100, 40).color("black").label("C");
+
+    const AB = RC.segment(A, B).color("black").width(2);
+    const BC = RC.segment(B, C).color("black").width(2);
+    const AC = RC.segment(A, C).color("black").width(2);
+
+    const a = RC.line(B, C).label("a").color("black").width(0.5);
+    const b = RC.line(A, C).label("b").color("black").width(0.5);
+    const c = RC.line(A, B).label("c").color("black").width(0.5);
+
+    const Ma = RC.midpoint(B, C).color("green").label("M_{a}");
+    const Mb = RC.midpoint(A, C).color("green").label("M_{b}");
+    const Mc = RC.midpoint(A, B).color("green").label("M_{c}");
+
+    const ha = RC.drop_perp(a, A).color("red").label("h_{a}");
+    const hb = RC.drop_perp(b, B).color("red").label("h_{b}");
+    const hc = RC.drop_perp(c, C).color("red").label("h_{c}");
+    const H = RC.intersectLL(ha, hb).color("red").label("H");
+    
+    const Ha = RC.intersectLL(ha, a).color("red").label("H_{a}");
+    const Hb = RC.intersectLL(hb, b).color("red").label("H_{b}");
+    const Hc = RC.intersectLL(hc, c).color("red").label("H_{c}");
+
+    const ca = RC.circle(Ma, B).color("DimGray");
+    const cb = RC.circle(Mb, A).color("DimGray");
+    const cc = RC.circle(Mc, A).color("DimGray");    
+  </script>
+</body>
+</html>
