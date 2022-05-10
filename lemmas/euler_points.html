@@ -48,7 +48,7 @@
         <li>Euler line is the line that contains circumcenter \(O\),
           centroid \(G\), center of Euler (nine point) circle \(N\)
           and orthocenter \(H\).
-        <li>Centroid \(G\) divides segment \(HO\) wher \(H\) is the
+        <li>Centroid \(G\) divides segment \(HO\) where \(H\) is the
         orthocenter and \(O\) is the circumcenter in ratio 2:1
         i.e. \(HG:GO = 2:1\)
       </ul>
@@ -58,9 +58,9 @@
     <!--- D32, L17, L18, L19, L20, L21, L22, L23, L24 --->
     <div class="lemma">
       <b>Proposition:</b> Euler (nine point) circle is the circle that
-      containing side midpoints \(M_a\), \(M_b\), \(M_c\), altitude
-      feet \(H_a\), \(H_b\), \(H_c\) and Euler points \(E_a\), \(E_b\)
-      and \(E_c\).
+      contains side midpoints \(M_a\), \(M_b\), \(M_c\), altitude feet
+      \(H_a\), \(H_b\), \(H_c\) and Euler points \(E_a\), \(E_b\) and
+      \(E_c\).
     </div>
     
 
@@ -86,7 +86,7 @@
           vertex \(A\) also contains the orthocenter \(H\) and altitude
           feet \(H_b\), and \(H_c\).
         <li>Circle centered at Euler point \(E_b\) containing the
-          vertex \(b\) also contains the orthocenter \(H\) and altitude
+          vertex \(B\) also contains the orthocenter \(H\) and altitude
           feet \(H_a\), and \(H_c\).
         <li>Circle centered at Euler point \(E_c\) containing the
           vertex \(C\) also contains the orthocenter \(H\) and altitude
@@ -139,7 +139,8 @@
     const N = RC.midpoint(O, H).label("N").color("purple");
     const n = RC.circle(N, Ea).color("purple");
 
-
+    const e = RC.line(O, H).color("purple").label("e");
+    
     const cEaA = RC.circle(Ea, A).color("magenta");
     const cEbB = RC.circle(Eb, B).color("magenta");
     const cEcC = RC.circle(Ec, C).color("magenta");
