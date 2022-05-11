@@ -1,6 +1,7 @@
 import { laTeX2HTML } from 'ArgoDG/src/dg/latex.js';
 import * as RC from 'ArgoDG/src/dg/rc.js';
 import { DGObject } from 'ArgoDG/src/dg/objects.js';
+import { Construction } from 'ArgoDG/src/dg/construction.js';
 
 const W = {
     free: RC.free,
@@ -30,7 +31,15 @@ const W = {
 class Solution {
     constructor(solutionJSON) {
         // dictionary mapping object names to construction steps and constructed objects
-        this._solution = this.loadFromJSON(solutionJSON)
+        this._solution = {}
+        // ordered list of steps
+        this._steps = []
+        // ArgoDG construction - ordered list of objects 
+        this._construction = new Construction();
+
+        // load solution from JSON
+        this.loadFromJSON(solutionJSON)
+        
         // detecting analogous constructions is usefull for giving hints
         this.detectAnalogousConstructions();
     }
@@ -45,17 +54,22 @@ class Solution {
         return this._solution[name].object;
     }
 
+    // ArgoDG construction
+    construction() {
+        return this._construction;
+    }
+
     // call a function on each object
     forEach(f) {
-        Object.keys(this._solution).forEach(name => f(this.object(name)));
+        Object.keys(this._solution).forEach(name => { f(this.object(name)); });
     }
 
     // load from ArgoTriCS exported JSON
     loadFromJSON(JSON) {
-        let objects = {}
         JSON.forEach(step => {
-            const obj = W[step.construction](...step.params.map(name => name in objects ? objects[name]["object"] : name));
+            const obj = W[step.construction](...step.params.map(name => name in this._solution ? this._solution[name]["object"] : name));
 
+            var self = this;
             function addObject(obj, name, step) {
                 obj.label(name);
                 if ("color" in step)
@@ -65,10 +79,12 @@ class Solution {
                 // set unique name in the step
                 let step_copy = {...step};
                 step_copy.name = name;
-                objects[name] = {
+                self._solution[name] = {
                     "object": obj,
                     "step": step_copy
                 };
+                self._steps.push(step_copy);
+                self._construction.addObject(obj);
             }
 
             if (typeof step.name === "string")
@@ -80,8 +96,6 @@ class Solution {
                 addObject(obj[1], step.name[1], step);
             }
         });
-        
-        return objects;
     }
 
     // names of objects that are free in the construction (initially given objects)
@@ -107,13 +121,18 @@ class Solution {
 
     // hide all constructed objects (show only objects that are initially given)
     hideConstructed() {
-        Object.keys(this._solution).forEach(name => this._solution[name].object.hide());
+        this.hideAll();
         this.givenObjects().forEach(name => this._solution[name].object.show());
     }
 
     // show all objects (given and constructed)
-    showAll() {
-        Object.keys(this._solution).forEach(name => this._solution[name].object.show());
+    hideAll() {
+        this.showAll(false);
+    }
+    
+    // show all objects (given and constructed)
+    showAll(yes) {
+        this.forEach(obj => obj.show(yes));
     }
 
     // show the constructed triangle

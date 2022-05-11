@@ -2,6 +2,7 @@ import * as DG from 'ArgoDG/src/dg/dg.js';
 import * as RC from 'ArgoDG/src/dg/rc.js';
 import { Construction } from 'ArgoDG/src/dg/construction.js';
 import { ConstructionToolbar } from 'ArgoDG/src/dg/tool.js';
+import { AnimationButtons } from 'ArgoDG/src/dg/animation_buttons.js';
 
 import { fetchJSON } from './json.js';
 import { Solution } from './solution.js';
@@ -31,11 +32,11 @@ function setup(solutionJSON) {
             if (obj.eq(knownObject)) {
                 const name = knownObject.label();
                 obj.label(name);
-                obj.color("green");
+                obj.color(knownObject.color() ? knownObject.color() : "green");
                 hints.remove(name);
             }
         }
-        
+
         solution.forEach(check);
         allTriangleElements.forEach(check);
     }
@@ -49,5 +50,16 @@ function setup(solutionJSON) {
     hints.show();
 }
 
+function animate(solutionJSON) {
+    DG.setup("mycanvas", { width: 500, height: 500, border: "1px solid #ccc"}, 0, 150, 0, 150);
 
-export { setup };
+    // load solution from JSON
+    const solution = new Solution(solutionJSON);
+    
+    const construction = solution.construction();
+    construction.setView(DG.view());
+
+    var animButtons = new AnimationButtons(construction, DG.view().canvas().container());
+}
+
+export { setup, animate };
