@@ -57,7 +57,7 @@ function animate(solutionJSON) {
     const solution = new Solution(solutionJSON);
     
     const construction = solution.construction();
-    construction.setView(DG.view());
+    construction.addView(DG.view());
 
     var animButtons = new AnimationButtons(construction, DG.view().canvas().container());
 }
