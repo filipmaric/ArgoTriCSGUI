@@ -2,12 +2,14 @@
 <html>
   <head>
     <title>Circumcenter</title>
-    
+
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <script src="https://cdn.jsdelivr.net/gh/filipmaric/ArgoDG/dist/DG.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/filipmaric/ArgoDG/dist/RC.js"></script>
+
+    <script src="hoverDGElements.js"></script>
     
     <link rel="stylesheet" href="lemmas.css" /> 
     
@@ -21,7 +23,7 @@
   
   <div id="lemmas">
     <!--- D1, L1 --->
-    <div class="lemma">
+    <div class="lemma hover">
       <b>Proposition:</b> All three side bisectors \(b_a\), \(b_b\),
       and \(b_c\) meet in a single point (circumcenter \(O\))
     </div>
@@ -30,17 +32,17 @@
     <div class="lemma">
       <b>Proposition:</b>
       <ul>
-        <li>Side bisector \(b_a\) contains midpoint \(M_a\) of segment
+        <li class="hover">Side bisector \(b_a\) contains midpoint \(M_a\) of segment
         \(BC\) and is perpendicular to line \(a\).
-        <li>Side bisector \(b_b\) contains midpoint \(M_b\) of segment
+        <li class="hover">Side bisector \(b_b\) contains midpoint \(M_b\) of segment
         \(AC\) and is perpendicular to line \(b\).
-        <li>Side bisector \(b_c\) contains midpoint \(M_c\) of segment
+        <li class="hover">Side bisector \(b_c\) contains midpoint \(M_c\) of segment
         \(AB\) and is perpendicular to line \(c\).
       </ul>
     </div>
 
     <!--- D26, L11, L12 --->
-    <div class="lemma">
+    <div class="lemma hover">
       <b>Proposition:</b> Circumcircle \(o\) is the circle centered at the
       circumcenter \(O\) containing vertices \(A\), \(B\), and \(C\).
     </div>
@@ -50,27 +52,30 @@
   <script>
     DG.setup("mycanvas", { width: 500, height: 500, border: "1px solid #ccc"}, 0, 120, 0, 120);
 
-    const A = RC.point(80, 95).color("black").label("A");
-    const B = RC.point(20, 40).color("black").label("B");
-    const C = RC.point(100, 40).color("black").label("C");
+    const elements = [];
+    const A = RC.point(80, 95).color("black").label("A"); elements.push(A);
+    const B = RC.point(20, 40).color("black").label("B"); elements.push(B);
+    const C = RC.point(100, 40).color("black").label("C"); elements.push(C);
 
-    const AB = RC.segment(A, B).color("black").width(2);
-    const BC = RC.segment(B, C).color("black").width(2);
-    const AC = RC.segment(A, C).color("black").width(2);
+    const AB = RC.segment(A, B).color("black").width(2); elements.push(AB);
+    const BC = RC.segment(B, C).color("black").width(2); elements.push(BC);
+    const AC = RC.segment(A, C).color("black").width(2); elements.push(AC);
 
-    const a = RC.line(B, C).label("a").color("black").width(0.5);
-    const b = RC.line(A, C).label("b").color("black").width(0.5);
-    const c = RC.line(A, B).label("c").color("black").width(0.5);
+    const a = RC.line(B, C).label("a").color("black").width(0.5); elements.push(a);
+    const b = RC.line(A, C).label("b").color("black").width(0.5); elements.push(b);
+    const c = RC.line(A, B).label("c").color("black").width(0.5); elements.push(c);
 
-    const ba = RC.bisector(B, C).color("blue").label("b_{a}");
-    const bb = RC.bisector(A, C).color("blue").label("b_{b}");
-    const bc = RC.bisector(A, B).color("blue").label("b_{c}");
-    const O = RC.intersectLL(ba, bb).color("blue").label("O");
-    const o = RC.circle(O, A).color("blue");
+    const ba = RC.bisector(B, C).color("blue").label("b_{a}"); elements.push(ba);
+    const bb = RC.bisector(A, C).color("blue").label("b_{b}"); elements.push(bb);
+    const bc = RC.bisector(A, B).color("blue").label("b_{c}"); elements.push(bc);
+    const O = RC.intersectLL(ba, bb).color("blue").label("O"); elements.push(O);
+    const o = RC.circle(O, A).color("blue").label("o"); elements.push(o);
 
-    const Ma = RC.midpoint(B, C).color("green").label("M_{a}");
-    const Mb = RC.midpoint(A, C).color("green").label("M_{b}");
-    const Mc = RC.midpoint(A, B).color("green").label("M_{c}");
+    const Ma = RC.midpoint(B, C).color("green").label("M_{a}"); elements.push(Ma);
+    const Mb = RC.midpoint(A, C).color("green").label("M_{b}"); elements.push(Mb);
+    const Mc = RC.midpoint(A, B).color("green").label("M_{c}"); elements.push(Mc);
+
+    hoverDGElements([...document.getElementsByClassName("hover")], elements);
   </script>
 </body>
 </html>

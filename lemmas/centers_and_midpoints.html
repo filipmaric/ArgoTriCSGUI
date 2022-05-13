@@ -1,0 +1,257 @@
+<html>
+  <head>
+    <title>Incenter, outcenters, and midpoints</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/filipmaric/ArgoDG/dist/DG.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/filipmaric/ArgoDG/dist/RC.js"></script>
+
+    <script src="hoverDGElements.js"></script>
+    
+    <link rel="stylesheet" href="lemmas.css" /> 
+  </head>
+<body>
+  <h1>Incenter, outcenters, and midpoints</h1>
+
+  <div id="figure">
+    <canvas id="mycanvas"></canvas>
+  </div>
+
+  <div id="lemmas">
+    <!--- L62, L63, L64 --->
+    <div class="lemma">
+      <b>Proposition:</b>
+      <ul>
+        <li class="hover">The midpoint \(M_a\) of segment \(BC\) is also a midpoint
+          of the segment \(S'_aT'_a\), where \(T'_a\) is the foot of
+          the projection of incenter \(I\) onto line \(a\), and
+          \(S'_a\) is the foot of the projection of outer incenter
+          \(I_a\) onto \(a\).
+        <li class="hover">The midpoint \(M_b\) of segment \(AC\) is also a midpoint
+          of the segment \(S'_bT'_b\), where \(T'_b\) is the foot of
+          the projection of incenter \(I\) onto line \(b\), and
+          \(S'_b\) is the foot of the projection of outer incenter
+          \(I_b\) onto \(b\).
+        <li class="hover">The midpoint \(M_c\) of segment \(AB\) is also a midpoint
+          of the segment \(S'_cT'_c\), where \(T'_c\) is the foot of
+          the projection of incenter \(I\) onto line \(c\), and
+          \(S'_c\) is the foot of the projection of outer incenter
+          \(I_c\) onto \(c\).
+      </ul>
+    </div>
+
+    <!--- L65, L66, L67 --->
+    <div class="lemma" id="lemma1">
+      <b>Proposition:</b>
+      <ul>
+        <li class="hover">Line \(IM_a\) that joins incenter \(I\) and
+          midpoint \(M_a\) of segment \(BC\) is parallel to the line
+          \(AS'_a\) that joins vertex \(A\) and foot \(S'_a\) of the
+          projection of outer incenter \(I_a\) onto \(a\).
+        <li class="hover">Line \(IM_b\) that joins incenter \(I\) and
+          midpoint \(M_b\) of segment \(AC\) is parallel to the line
+          \(BS'_b\) that joins vertex \(B\) and foot \(S'_b\) of the
+          projection of outer incenter \(I_b\) onto \(b\).
+        <li class="hover">Line \(IM_c\) that joins incenter \(I\) and
+          midpoint \(M_c\) of segment \(AB\) is parallel to the line
+          \(CS'_c\) that joins vertex \(C\) and foot \(S'_c\) of the
+          projection of outer incenter \(I_c\) onto \(c\).
+      </ul>
+    </div>
+
+    <!--- L74, L75, L76 --->
+    <div class="lemma">
+      <b>Proposition:</b>
+      <ul>
+        <li class="hover">Foot \(T'_a\) of normal projection of incenter \(I\) onto
+          side \(a\) lies on the circle \(c_{IMa}\) over diameter \(IM_a\), where
+          \(M_a\) is the midpoint of segment \(BC\).
+        <li class="hover">Foot \(T'_b\) of normal projection of incenter \(I\) onto
+          side \(b\) lies on the circle \(c_{IMb}\) over diameter \(IM_b\), where
+          \(M_b\) is the midpoint of segment \(AC\).
+        <li class="hover">Foot \(T'_c\) of normal projection of incenter \(I\) onto
+          side \(c\) lies on the circle \(c_{IMc}\) over diameter \(IM_c\), where
+          \(M_c\) is the midpoint of segment \(AB\).
+      </ul>
+    </div>
+
+    <!--- ??? ---->
+    <div class="lemma">
+      <b>Proposition:</b>
+      <ul>
+        <li class="hover">Vertex \(A\) and foot \(T'_a\) of normal
+          projection of incenter \(I\) onto side \(a\) lie on the
+          circle \(c_{ISa}\) over diameter \(IS_a\), where \(S_a\) is
+          the outer angle bisector foot.
+        <li class="hover">Vertex \(B\) and foot \(T'_b\) of normal
+          projection of incenter \(I\) onto side \(b\) lie on the
+          circle \(c_{ISb}\) over diameter \(IS_b\), where \(S_b\) is
+          the outer angle bisector foot.
+        <li class="hover">Vertex \(C\) and foot \(T'_c\) of normal
+          projection of incenter \(I\) onto side \(c\) lie on the
+          circle \(c_{ISc}\) over diameter \(IS_c\), where \(S_c\) is
+          the outer angle bisector foot.
+      </ul>
+    </div>
+    
+    <!--- ??? ---->
+    <div class="lemma">
+      <b>Proposition:</b>
+      <ul>
+        <li class="hover">Vertex \(A\) and foot \(S'_a\) of normal
+          projection of outcenter \(I_a\) onto side \(a\) lie on the
+          circle \(c_{IaSa}\) over diameter \(I_aS_a\), where \(S_a\) is
+          the outer angle bisector foot.
+        <li class="hover">Vertex \(B\) and foot \(S'_b\) of normal
+          projection of outcenter \(I_b\) onto side \(b\) lie on the
+          circle \(c_{IbSb}\) over diameter \(I_bS_b\), where \(S_b\) is
+          the outer angle bisector foot.
+        <li class="hover">Vertex \(C\) and foot \(S'_c\) of normal
+          projection of outcenter \(I_c\) onto side \(c\) lie on the
+          circle \(c_{IcSc}\) over diameter \(I_cS_c\), where \(S_c\) is
+          the outer angle bisector foot.
+      </ul>
+    </div>
+    
+  </div>
+
+  <script>
+    DG.setup("mycanvas", { width: 500, height: 500, border: "1px solid #ccc"}, 0, 120, 0, 120);
+
+    const elements = [];
+    
+    // vertices
+    const A = RC.point(75, 95).color("black").label("A"); elements.push(A);
+    const B = RC.point(15, 40).color("black").label("B"); elements.push(B);
+    const C = RC.point(105, 40).color("black").label("C"); elements.push(C);
+
+    // segments
+    const AB = RC.segment(A, B).color("black").width(2);  elements.push(AB);
+    const BC = RC.segment(B, C).color("black").width(2);  elements.push(BC);
+    const AC = RC.segment(A, C).color("black").width(2);  elements.push(AC);
+
+    // sides
+    const a = RC.line(B, C).label("a").color("black").width(0.5); elements.push(a);
+    const b = RC.line(A, C).label("b").color("black").width(0.5); elements.push(b);
+    const c = RC.line(A, B).label("c").color("black").width(0.5); elements.push(c);
+
+    // angle bisectors
+    const ta = RC.angle_bisector(B, A, C).color("orange").label("t_{a}"); elements.push(ta); 
+    const tb = RC.angle_bisector(A, B, C).color("orange").label("t_{b}"); elements.push(tb);
+    const tc = RC.angle_bisector(B, C, A).color("orange").label("t_{c}"); elements.push(tc);
+
+    // angle bisector feet
+    const Ta = RC.intersectLL(ta, a).color("orange").label("T_{a}"); elements.push(Ta); 
+    const Tb = RC.intersectLL(tb, b).color("orange").label("T_{b}"); elements.push(Tb);
+    const Tc = RC.intersectLL(tc, c).color("orange").label("T_{c}"); elements.push(Tc); 
+    
+    // incenter
+    const I = RC.intersectLL(ta, tb).color("orange").label("I"); elements.push(I); 
+
+    // incenter projection feet
+    const Tpa = RC.foot(a, I).color("Chocolate").label("T'_{a}"); elements.push(Tpa); 
+    const Tpb = RC.foot(b, I).color("Chocolate").label("T'_{b}"); elements.push(Tpb); 
+    const Tpc = RC.foot(c, I).color("Chocolate").label("T'_{c}"); elements.push(Tpc); 
+    
+    const ITpa = RC.segment(I, Tpa).color("Chocolate").width(1.5).dashed(); elements.push(ITpa); 
+    const ITpb = RC.segment(I, Tpb).color("Chocolate").width(1.5).dashed(); elements.push(ITpb); 
+    const ITpc = RC.segment(I, Tpc).color("Chocolate").width(1.5).dashed(); elements.push(ITpc); 
+
+    // out angle bisectors
+    const sa = RC.drop_perp(ta, A).color("tomato").width(1.5).label("s_{a}"); elements.push(sa); 
+    const sb = RC.drop_perp(tb, B).color("tomato").width(1.5).label("s_{b}"); elements.push(sb); 
+    const sc = RC.drop_perp(tc, C).color("tomato").width(1.5).label("s_{c}"); elements.push(sc); 
+
+    // out angle bisector feet
+    const Sa = RC.intersectLL(sa, a).color("tomato").label("S_{a}"); elements.push(Sa); 
+    const Sb = RC.intersectLL(sb, b).color("tomato").label("S_{b}"); elements.push(Sb); 
+    const Sc = RC.intersectLL(sc, c).color("tomato").label("S_{c}"); elements.push(Sc); 
+    
+    // outcircle centers
+    const Ia = RC.intersectLL(sb, sc).color("tomato").label("I_{a}"); elements.push(Ia); 
+    const Ib = RC.intersectLL(sa, sc).color("tomato").label("I_{b}"); elements.push(Ib); 
+    const Ic = RC.intersectLL(sa, sb).color("tomato").label("I_{c}"); elements.push(Ic); 
+    
+    // outcenters projection feet
+    const Spa = RC.foot(a, Ia).color("tomato").label("S'_{a}"); elements.push(Spa); 
+    const Spb = RC.foot(b, Ib).color("tomato").label("S'_{b}"); elements.push(Spb); 
+    const Spc = RC.foot(c, Ic).color("tomato").label("S'_{c}"); elements.push(Spc); 
+
+    const IaSpa = RC.segment(Ia, Spa).color("tomato").width(1.5).dashed(); elements.push(IaSpa); 
+    const IbSpb = RC.segment(Ib, Spb).color("tomato").width(1.5).dashed(); elements.push(IbSpb); 
+    const IcSpc = RC.segment(Ic, Spc).color("tomato").width(1.5).dashed(); elements.push(IcSpc); 
+    
+    
+    // midpoints
+    const Ma = RC.midpoint(B, C).color("green").label("M_{a}"); elements.push(Ma); 
+    const Mb = RC.midpoint(A, C).color("green").label("M_{b}"); elements.push(Mb); 
+    const Mc = RC.midpoint(A, B).color("green").label("M_{c}"); elements.push(Mc); 
+
+    // parallel lines
+    const IMa = RC.line(I, Ma).label("IM_a").color("DarkGray").width(1.5); elements.push(IMa); 
+    const ASpa = RC.line(A, Spa).label("AS'_a").color("DarkGray").width(1.5); elements.push(ASpa); 
+
+    const IMb = RC.line(I, Mb).label("IM_b").color("DarkGray").width(1.5); elements.push(IMb); 
+    const BSpb = RC.line(B, Spb).label("BS'_b").color("DarkGray").width(1.5); elements.push(BSpb); 
+
+    const IMc = RC.line(I, Mc).label("IM_c").color("DarkGray").width(1.5); elements.push(IMc); 
+    const CSpc = RC.line(C, Spc).label("CS'_c").color("DarkGray").width(1.5); elements.push(CSpc); 
+
+    
+    // circles over incenter-midpoints
+    const cIMa = RC.circle_over_segment(I, Ma).label("c_{IMa}").color("RosyBrown").width(1.5); elements.push(cIMa); 
+    const cIMb = RC.circle_over_segment(I, Mb).label("c_{IMb}").color("RosyBrown").width(1.5); elements.push(cIMb); 
+    const cIMc = RC.circle_over_segment(I, Mc).label("c_{IMc}").color("RosyBrown").width(1.5); elements.push(cIMc); 
+
+    // circles over incenter-outcenters projection feet
+    const cISpa = RC.circle_over_segment(I, Spa).color("cyan").width(1.5); elements.push(cISpa); 
+    const cISpb = RC.circle_over_segment(I, Spb).color("cyan").width(1.5); elements.push(cISpb); 
+    const cISpc = RC.circle_over_segment(I, Spc).color("cyan").width(1.5); elements.push(cISpc); 
+
+    // circles over incenter-angle bisector feet
+    const cITa = RC.circle_over_segment(I, Ta).color("Teal").width(1.5); elements.push(cITa); 
+    const cITb = RC.circle_over_segment(I, Tb).color("Teal").width(1.5); elements.push(cITb); 
+    const cITc = RC.circle_over_segment(I, Tc).color("Teal").width(1.5); elements.push(cITc); 
+
+    // contain vertices
+    // circles over incenter-out angle bisector feet
+    const cISa = RC.circle_over_segment(I, Sa).label("c_{ISa}").color("lawngreen").width(2); elements.push(cISa);
+    const cISb = RC.circle_over_segment(I, Sb).label("c_{ISb}").color("lawngreen").width(2); elements.push(cISb);
+    const cISc = RC.circle_over_segment(I, Sc).label("c_{ISc}").color("lawngreen").width(2); elements.push(cISc);
+
+    const ISa = RC.segment(I, Sa).label("IS_a").color("lawngreen").width(2); elements.push(ISa);
+    const ISb = RC.segment(I, Sb).label("IS_b").color("lawngreen").width(2); elements.push(ISb);
+    const ISc = RC.segment(I, Sc).label("IS_c").color("lawngreen").width(2); elements.push(ISc);
+    
+    
+    // circles over outcenter-midpoints 
+    const cIaMa = RC.circle_over_segment(Ia, Ma).color("RosyBrown").width(1.5); elements.push(cIaMa);
+    const cIbMb = RC.circle_over_segment(Ib, Mb).color("RosyBrown").width(1.5); elements.push(cIbMb);
+    const cIcMc = RC.circle_over_segment(Ic, Mc).color("RosyBrown").width(1.5); elements.push(cIcMc);
+
+    // circles over outcenter-outcenters projection feet
+    const cIaTpa = RC.circle_over_segment(Ia, Tpa).color("cyan").width(1.5); elements.push(cIaTpa);
+    const cIbTpb = RC.circle_over_segment(Ib, Tpb).color("cyan").width(1.5); elements.push(cIbTpb);
+    const cIcTpc = RC.circle_over_segment(Ic, Tpc).color("cyan").width(1.5); elements.push(cIcTpc);
+
+    // circles over outcenter-angle bisector feet
+    const cIaTa = RC.circle_over_segment(Ia, Ta).color("Teal").width(1.5); elements.push(cIaTa);
+    const cIbTb = RC.circle_over_segment(Ib, Tb).color("Teal").width(1.5); elements.push(cIbTb);
+    const cIcTc = RC.circle_over_segment(Ic, Tc).color("Teal").width(1.5); elements.push(cIcTc);
+
+    // contain vertices
+    // circles over outcenter-out angle bisector feet
+    const cIaSa = RC.circle_over_segment(Ia, Sa).label("c_{IaSa}").color("darkgreen").width(2); elements.push(cIaSa);
+    const cIbSb = RC.circle_over_segment(Ib, Sb).label("c_{IbSb}").color("darkgreen").width(2); elements.push(cIbSb);
+    const cIcSc = RC.circle_over_segment(Ic, Sc).label("c_{IcSc}").color("darkgreen").width(2); elements.push(cIcSc);
+    
+    const IaSa = RC.segment(Ia, Sa).label("I_aS_a").color("darkgreen").width(2); elements.push(IaSa);
+    const IbSb = RC.segment(Ib, Sb).label("I_bS_b").color("darkgreen").width(2); elements.push(IbSb);
+    const IcSc = RC.segment(Ic, Sc).label("I_cS_c").color("darkgreen").width(2); elements.push(IcSc);
+
+    hoverDGElements([...document.getElementsByClassName("hover")], elements, 0.3);
+    
+  </script>
+</body>
+</html>

@@ -6,6 +6,8 @@
 
     <script src="https://cdn.jsdelivr.net/gh/filipmaric/ArgoDG/dist/DG.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/filipmaric/ArgoDG/dist/RC.js"></script>
+
+    <script src="hoverDGElements.js"></script>
     
     <link rel="stylesheet" href="lemmas.css" /> 
     
@@ -22,11 +24,11 @@
     <div class="lemma">
       <b>Proposition:</b> 
       <ul>
-        <li>Foot \(T_a\) of angle bisector \(t_a\) is its intersection
+        <li class="hover">Foot \(T_a\) of angle bisector \(t_a\) is its intersection
           with the side \(a\).
-        <li>Foot \(T_b\) of angle bisector \(t_b\) is its intersection
+        <li class="hover">Foot \(T_b\) of angle bisector \(t_b\) is its intersection
           with the side \(b\).
-        <li>Foot \(T_c\) of angle bisector \(t_c\) is its intersection
+        <li class="hover">Foot \(T_c\) of angle bisector \(t_c\) is its intersection
           with the side \(c\).
         </li>
     </div>    
@@ -35,12 +37,21 @@
     <div class="lemma">
       <b>Proposition:</b> 
       <ul>
-        <li>Distance from angle foot \(T_a\) to side \(b\) is equal to
-          distance from \(T_a\) to side \(c\).
-        <li>Distance from angle foot \(T_b\) to side \(c\) is equal to
-          distance from \(T_b\) to side \(a\).
-        <li>Distance from angle foot \(T_c\) to side \(a\) is equal to
-          distance from \(T_c\) to side \(b\).
+        <li class="hover">Distance from angle foot \(T_a\) to side
+          \(b\) is equal to distance from \(T_a\) to side \(c\), i.e.,
+          segments \(T_aT_{ab}\) and \(T_aT_{ac}\) are congruent (they
+          join \(T_a\) and its perpendicular projections \(T_{ab}\)
+          and \(T_{ac}\)).
+        <li class="hover">Distance from angle foot \(T_b\) to side
+          \(a\) is equal to distance from \(T_b\) to side \(c\), i.e.,
+          segments \(T_bT_{ba}\) and \(T_bT_{bc}\) are congruent (they
+          join \(T_b\) and its perpendicular projections \(T_{ba}\)
+          and \(T_{bc}\)).
+        <li class="hover">Distance from angle foot \(T_c\) to side
+          \(a\) is equal to distance from \(T_c\) to side \(b\), i.e.,
+          segments \(T_cT_{ca}\) and \(T_cT_{cb}\) are congruent (they
+          join \(T_c\) and its perpendicular projections \(T_{ca}\)
+          and \(T_{cb}\)).
       </ul>
     </div>
 
@@ -48,61 +59,69 @@
     <div class="lemma">
       <b>Proposition:</b> 
       <ul>
-        <li>Sides b and c are tangent to the circle centered at angle
-          bisector foot \(T_a\) that contains projections \(T_{ab}\)
-          and \(T_{ac}\) of the point \(T_a\) onto sides \(b\) and \(c\).
-        <li>Sides a and c are tangent to the circle centered at angle
-          bisector foot \(T_b\) that contains projections \(T_{ba}\)
-          and \(T_{bc}\) of the point \(T_b\) onto sides \(a\) and \(c\).
-        <li>Sides a and b are tangent to the circle centered at angle
-          bisector foot \(T_c\) that contains projections \(T_{ca}\)
-          and \(T_{cb}\) of the point \(T_c\) onto sides \(a\) and \(b\).
+        <li class="hover">Sides b and c are tangent to the circle
+          \(c_{Ta}\) centered at angle bisector foot \(T_a\) that
+          contains projections \(T_{ab}\) and \(T_{ac}\) of the point
+          \(T_a\) onto sides \(b\) and \(c\).
+        <li class="hover">Sides a and c are tangent to the circle
+          \(c_{Tb}\) centered at angle bisector foot \(T_b\) that
+          contains projections \(T_{ba}\) and \(T_{bc}\) of the point
+          \(T_b\) onto sides \(a\) and \(c\).
+        <li class="hover">Sides a and b are tangent to the circle
+          \(c_{Tc}\) centered at angle bisector foot \(T_c\) that
+          contains projections \(T_{ca}\) and \(T_{cb}\) of the point
+          \(T_c\) onto sides \(a\) and \(b\).
       </ul>
     </div>
-    
+
   </div>
 
   <script>
     DG.setup("mycanvas", { width: 500, height: 500, border: "1px solid #ccc"}, 0, 120, 0, 120);
 
-    const A = RC.point(75, 95).color("black").label("A");
-    const B = RC.point(15, 40).color("black").label("B");
-    const C = RC.point(105, 40).color("black").label("C");
-
-    const AB = RC.segment(A, B).color("black").width(2);
-    const BC = RC.segment(B, C).color("black").width(2);
-    const AC = RC.segment(A, C).color("black").width(2);
-
-    const a = RC.line(B, C).label("a").color("black").width(0.5);
-    const b = RC.line(A, C).label("b").color("black").width(0.5);
-    const c = RC.line(A, B).label("c").color("black").width(0.5);
+    const elements = [];
     
-    const ta = RC.angle_bisector(B, A, C).color("orange").label("t_{a}"); 
-    const tb = RC.angle_bisector(A, B, C).color("orange").label("t_{b}"); 
-    const tc = RC.angle_bisector(B, C, A).color("orange").label("t_{c}");
-    const I = RC.intersectLL(ta, tb).color("orange").label("I");
+    const A = RC.point(75, 95).color("black").label("A"); elements.push(A);
+    const B = RC.point(15, 40).color("black").label("B"); elements.push(B);
+    const C = RC.point(105, 40).color("black").label("C"); elements.push(C);
+
+    const AB = RC.segment(A, B).color("black").width(2); elements.push(AB);
+    const BC = RC.segment(B, C).color("black").width(2); elements.push(BC);
+    const AC = RC.segment(A, C).color("black").width(2); elements.push(AC);
+
+    const a = RC.line(B, C).label("a").color("black").width(0.5); elements.push(a);
+    const b = RC.line(A, C).label("b").color("black").width(0.5); elements.push(b);
+    const c = RC.line(A, B).label("c").color("black").width(0.5); elements.push(c);
     
-    const Ta = RC.intersectLL(ta, a).color("orange").label("T_{a}");
-    const Tb = RC.intersectLL(tb, b).color("orange").label("T_{b}");
-    const Tc = RC.intersectLL(tc, c).color("orange").label("T_{c}");
+    const ta = RC.angle_bisector(B, A, C).color("orange").label("t_{a}"); elements.push(ta);
+    const tb = RC.angle_bisector(A, B, C).color("orange").label("t_{b}"); elements.push(tb);
+    const tc = RC.angle_bisector(B, C, A).color("orange").label("t_{c}"); elements.push(tc);
+    const I = RC.intersectLL(ta, tb).color("orange").label("I"); elements.push(I);
+    
+    const Ta = RC.intersectLL(ta, a).color("orange").label("T_{a}"); elements.push(Ta);
+    const Tb = RC.intersectLL(tb, b).color("orange").label("T_{b}"); elements.push(Tb);
+    const Tc = RC.intersectLL(tc, c).color("orange").label("T_{c}"); elements.push(Tc);
 
-    const Ta_b = RC.foot(b, Ta).color("Olive").label("T_{ab}");
-    const Ta_c = RC.foot(c, Ta).color("Olive").label("T_{ac}");
-    const Ta_Ta_b = RC.segment(Ta, Ta_b).color("Olive").dashed();
-    const Ta_Ta_c = RC.segment(Ta, Ta_c).color("Olive").dashed();
-    const cTa = RC.circle(Ta, Ta_b).color("Olive").dashed().width(1.5);
+    const Tab = RC.foot(b, Ta).color("Olive").label("T_{ab}"); elements.push(Tab);
+    const Tac = RC.foot(c, Ta).color("Olive").label("T_{ac}"); elements.push(Tac);
+    const Ta_Tab = RC.segment(Ta, Tab).color("Olive").label("T_aT_{ab}").dashed(); elements.push(Ta_Tab);
+    const Ta_Tac = RC.segment(Ta, Tac).color("Olive").label("T_aT_{ac}").dashed(); elements.push(Ta_Tac);
+    const cTa = RC.circle(Ta, Tab).color("Olive").label("c_{Ta}").dashed().width(1.5); elements.push(cTa);
 
-    const Tb_a = RC.foot(a, Tb).color("DarkCyan").label("T_{ba}");
-    const Tb_c = RC.foot(c, Tb).color("DarkCyan").label("T_{bc}");
-    const Tb_Tb_a = RC.segment(Tb, Tb_a).color("DarkCyan").dashed();
-    const Tb_Tb_c = RC.segment(Tb, Tb_c).color("DarkCyan").dashed();
-    const cTb = RC.circle(Tb, Tb_a).color("DarkCyan").dashed().width(1.5);
+    const Tba = RC.foot(a, Tb).color("Olive").label("T_{ba}"); elements.push(Tba);
+    const Tbc = RC.foot(c, Tb).color("Olive").label("T_{bc}"); elements.push(Tbc);
+    const Tb_Tba = RC.segment(Tb, Tba).color("Olive").label("T_bT_{ba}").dashed(); elements.push(Tb_Tba);
+    const Tb_Tbc = RC.segment(Tb, Tbc).color("Olive").label("T_bT_{bc}").dashed(); elements.push(Tb_Tbc);
+    const cTb = RC.circle(Tb, Tba).color("Olive").label("c_{Tb}").dashed().width(1.5); elements.push(cTb);
 
-    const Tc_a = RC.foot(a, Tc).color("LimeGreen").label("T_{ca}");
-    const Tc_b = RC.foot(b, Tc).color("LimeGreen").label("T_{cb}");
-    const Tc_Tc_a = RC.segment(Tc, Tc_a).color("LimeGreen").dashed();
-    const Tc_Tc_b = RC.segment(Tc, Tc_b).color("LimeGreen").dashed();
-    const cTc = RC.circle(Tc, Tc_a).color("LimeGreen").dashed().width(1.5);    
+    const Tca = RC.foot(a, Tc).color("Olive").label("T_{ca}"); elements.push(Tca);
+    const Tcb = RC.foot(b, Tc).color("Olive").label("T_{cb}"); elements.push(Tcb);
+    const Tc_Tca = RC.segment(Tc, Tca).color("Olive").label("T_cT_{ca}").dashed(); elements.push(Tc_Tca);
+    const Tc_Tcb = RC.segment(Tc, Tcb).color("Olive").label("T_cT_{cb}").dashed(); elements.push(Tc_Tcb);
+    const cTc = RC.circle(Tc, Tca).color("Olive").label("c_{Tc}").dashed().width(1.5); elements.push(cTc);
+
+
+    hoverDGElements([...document.getElementsByClassName("hover")], elements);
   </script>
 </body>
 </html>

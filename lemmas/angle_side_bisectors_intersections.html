@@ -7,6 +7,8 @@
 
     <script src="https://cdn.jsdelivr.net/gh/filipmaric/ArgoDG/dist/DG.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/filipmaric/ArgoDG/dist/RC.js"></script>
+
+    <script src="hoverDGElements.js"></script>
     
     <link rel="stylesheet" href="lemmas.css" /> 
   </head>
@@ -22,11 +24,11 @@
     <div class="lemma">
       <b>Proposition:</b>
       <ul>
-        <li>Intersection \(N_a\) of angle bisector \(t_a\) and side
+        <li class="hover">Intersection \(N_a\) of angle bisector \(t_a\) and side
           bisector \(b_a\) lies on the circumcircle \(o\).
-        <li>Intersection \(N_b\) of angle bisector \(t_b\) and side
+        <li class="hover">Intersection \(N_b\) of angle bisector \(t_b\) and side
           bisector \(b_b\) lies on the circumcircle \(o\).
-        <li>Intersection \(N_c\) of angle bisector \(t_c\) and side
+        <li class="hover">Intersection \(N_c\) of angle bisector \(t_c\) and side
           bisector \(b_c\) lies on the circumcircle \(o\).
       </ul>
     </div>
@@ -34,12 +36,12 @@
     <div class="lemma">
       <b>Proposition:</b>
       <ul>
-        <li>Circle centered at \(N_a\) containing \(I\) also contains
-          vertices \(B\) and \(C\).
-        <li>Circle centered at \(N_b\) containing \(I\) also contains
-          vertices \(A\) and \(C\).
-        <li>Circle centered at \(N_c\) containing \(I\) also contains
-          vertices \(A\) and \(B\).
+        <li class="hover">Circle \(c_{NaI}\) centered at \(N_a\)
+          containing \(I\) also contains vertices \(B\) and \(C\).
+        <li class="hover">Circle \(c_{NbI}\) centered at \(N_b\)
+          containing \(I\) also contains vertices \(A\) and \(C\).
+        <li class="hover">Circle \(c_{NcI}\) centered at \(N_c\)
+          containing \(I\) also contains vertices \(A\) and \(B\).
       </ul>
     </div>
 
@@ -48,40 +50,45 @@
   <script>
     DG.setup("mycanvas", { width: 500, height: 500, border: "1px solid #ccc"}, 0, 120, 0, 120);
 
-    const A = RC.point(80, 85).color("black").label("A");
-    const B = RC.point(20, 40).color("black").label("B");
-    const C = RC.point(100, 40).color("black").label("C");
+    const elements = [];
+    
+    const A = RC.point(80, 85).color("black").label("A"); elements.push(A);
+    const B = RC.point(20, 40).color("black").label("B"); elements.push(B);
+    const C = RC.point(100, 40).color("black").label("C"); elements.push(C);
 
-    const AB = RC.segment(A, B).color("black").width(2);
-    const BC = RC.segment(B, C).color("black").width(2);
-    const AC = RC.segment(A, C).color("black").width(2);
+    const AB = RC.segment(A, B).color("black").width(2); elements.push(AB);
+    const BC = RC.segment(B, C).color("black").width(2); elements.push(BC);
+    const AC = RC.segment(A, C).color("black").width(2); elements.push(AC);
 
-    const a = RC.line(B, C).label("a").color("black").width(0.5);
-    const b = RC.line(A, C).label("b").color("black").width(0.5);
-    const c = RC.line(A, B).label("c").color("black").width(0.5);
+    const a = RC.line(B, C).label("a").color("black").width(0.5); elements.push(a);
+    const b = RC.line(A, C).label("b").color("black").width(0.5); elements.push(b);
+    const c = RC.line(A, B).label("c").color("black").width(0.5); elements.push(c);
 
-    const ba = RC.bisector(B, C).color("blue").label("b_{a}");
-    const bb = RC.bisector(A, C).color("blue").label("b_{b}");
-    const bc = RC.bisector(A, B).color("blue").label("b_{c}");
-    const O = RC.intersectLL(ba, bb).color("blue").label("O");
-    const o = RC.circle(O, A).color("blue");
+    const ba = RC.bisector(B, C).color("blue").label("b_{a}"); elements.push(ba);
+    const bb = RC.bisector(A, C).color("blue").label("b_{b}"); elements.push(bb);
+    const bc = RC.bisector(A, B).color("blue").label("b_{c}"); elements.push(bc);
+    const O = RC.intersectLL(ba, bb).color("blue").label("O"); elements.push(O);
+    const o = RC.circle(O, A).label("o").color("blue"); elements.push(o);
 
 
-    const ta = RC.angle_bisector(B, A, C).color("orange").label("t_{a}"); 
-    const tb = RC.angle_bisector(A, B, C).color("orange").label("t_{b}"); 
-    const tc = RC.angle_bisector(B, C, A).color("orange").label("t_{c}");
-    const I = RC.intersectLL(ta, tb).color("orange").label("I");
+    const ta = RC.angle_bisector(B, A, C).color("orange").label("t_{a}"); elements.push(ta); 
+    const tb = RC.angle_bisector(A, B, C).color("orange").label("t_{b}"); elements.push(tb);
+    const tc = RC.angle_bisector(B, C, A).color("orange").label("t_{c}"); elements.push(tc);
+    const I = RC.intersectLL(ta, tb).color("orange").label("I"); elements.push(I);
     const Tpa = RC.foot(a, I).hide();
-    const i = RC.circle(I, Tpa).color("orange").label("i");
+    const i = RC.circle(I, Tpa).color("orange").label("i"); elements.push(i);
 
 
-    const Na = RC.intersectLL(ba, ta).label("N_{a}").color("DeepPink");
-    const Nb = RC.intersectLL(bb, tb).label("N_{b}").color("DeepPink");
-    const Nc = RC.intersectLL(bc, tc).label("N_{c}").color("DeepPink");
+    const Na = RC.intersectLL(ba, ta).label("N_{a}").color("DeepPink"); elements.push(Na);
+    const Nb = RC.intersectLL(bb, tb).label("N_{b}").color("DeepPink"); elements.push(Nb);
+    const Nc = RC.intersectLL(bc, tc).label("N_{c}").color("DeepPink"); elements.push(Nc);
 
-    const cNaI = RC.circle(Na, I).color("DeepPink").width(1.5);
-    const cNbI = RC.circle(Nb, I).color("DeepPink").width(1.5);
-    const cNcI = RC.circle(Nc, I).color("DeepPink").width(1.5);    
+    const cNaI = RC.circle(Na, I).color("DeepPink").label("c_{NaI}").width(1.5); elements.push(cNaI);
+    const cNbI = RC.circle(Nb, I).color("DeepPink").label("c_{NbI}").width(1.5); elements.push(cNbI);
+    const cNcI = RC.circle(Nc, I).color("DeepPink").label("c_{NcI}").width(1.5); elements.push(cNcI);
+
+
+    hoverDGElements([...document.getElementsByClassName("hover")], elements);
   </script>
 </body>
 </html>

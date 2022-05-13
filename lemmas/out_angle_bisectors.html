@@ -7,7 +7,8 @@
 
     <script src="https://cdn.jsdelivr.net/gh/filipmaric/ArgoDG/dist/DG.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/filipmaric/ArgoDG/dist/RC.js"></script>
-    
+
+    <script src="hoverDGElements.js"></script>
     <link rel="stylesheet" href="lemmas.css" /> 
   </head>
 <body>
@@ -22,79 +23,37 @@
     <div class="lemma">
       <b>Proposition:</b>
       <ul>
-        <li>Two external angle bisectors \(s_b\) and \(s_c\) and
+        <li class="hover">Two external angle bisectors \(s_b\) and \(s_c\) and
           internal angle bisector \(t_a\) meet at single point \(I_a\)
           that is the center of excircle \(i_a\).
-        <li>Two external angle bisectors \(s_a\) and \(s_c\) and
+        <li class="hover">Two external angle bisectors \(s_a\) and \(s_c\) and
           internal angle bisector \(t_b\) meet at single point \(I_b\)
           that is the center of excircle \(i_b\).
-        <li>Two external angle bisectors \(s_a\) and \(s_b\) and
+        <li class="hover">Two external angle bisectors \(s_a\) and \(s_b\) and
           internal angle bisector \(t_c\) meet at single point \(I_c\)
           that is the center of excircle \(i_c\).
       </ul>
     </div>
     
-    <!--- L62, L63, L64 --->
-    <div class="lemma">
-      <b>Proposition:</b>
-      <ul>
-        <li>The midpoint \(M_a\) of segment \(BC\) is also a midpoint
-          of the segment \(S'_aT'_a\), where \(T'_a\) is the foot of
-          the projection of incenter \(I\) onto line \(a\), and
-          \(S'_a\) is the foot of the projection of outer incenter
-          \(I_a\) onto \(a\).
-        <li>The midpoint \(M_b\) of segment \(AC\) is also a midpoint
-          of the segment \(S'_bT'_b\), where \(T'_b\) is the foot of
-          the projection of incenter \(I\) onto line \(b\), and
-          \(S'_b\) is the foot of the projection of outer incenter
-          \(I_b\) onto \(b\).
-        <li>The midpoint \(M_c\) of segment \(AB\) is also a midpoint
-          of the segment \(S'_cT'_c\), where \(T'_c\) is the foot of
-          the projection of incenter \(I\) onto line \(c\), and
-          \(S'_c\) is the foot of the projection of outer incenter
-          \(I_c\) onto \(c\).
-      </ul>
-    </div>
-
-    <!--- L65, L66, L67 --->
-    <div class="lemma">
-      <b>Proposition:</b>
-      <ul>
-        <li>Line that joins incenter \(I\) and midpoint \(M_a\) of
-          segment \(BC\) is parallel to the line that joins vertex
-          \(A\) and foot \(S'_a\) of the projection of outer incenter
-          \(I_a\) onto \(a\).
-        <li>Line that joins incenter \(I\) and midpoint \(M_b\) of
-          segment \(AC\) is parallel to the line that joins vertex
-          \(B\) and foot \(S'_b\) of the projection of outer incenter
-          \(I_b\) onto \(b\).
-        <li>Line that joins incenter \(I\) and midpoint \(M_c\) of
-          segment \(AB\) is parallel to the line that joins vertex
-          \(C\) and foot \(S'_c\) of the projection of outer incenter
-          \(I_c\) onto \(c\).
-      </ul>
-    </div>
-
-    
     <!--- L71, L72, L73 --->
     <div class="lemma">
       <b>Proposition:</b>
       <ul>
-        <li>Vertex \(A\) lies on the circle over segment \(T_aS_a\),
+        <li class="hover">Vertex \(A\) lies on the circle \(c_{TaSa}\) over segment \(T_aS_a\),
           where \(T_a\) is the foot of angle bisector \(t_a\) (i.e.,
           its intersection with line \(a\)), and \(S_a\) is the foot
           of outer angle bisector \(s_a\) (i.e., its intersection with
           line \(a\)).
-        <li>Vertex \(B\) lies on the circle over segment \(T_bS_b\),
-          where \(T_b\) is the foot of angle bisector \(t_b\) (i.e.,
-          its intersection with line \(b\)), and \(S_b\) is the foot
-          of outer angle bisector \(s_b\) (i.e., its intersection with
-          line \(b\)).
-        <li>Vertex \(C\) lies on the circle over segment \(T_cS_c\),
-          where \(T_c\) is the foot of angle bisector \(t_c\) (i.e.,
-          its intersection with line \(c\)), and \(S_c\) is the foot
-          of outer angle bisector \(s_c\) (i.e., its intersection with
-          line \(c\)).
+        <li class="hover">Vertex \(B\) lies on the circle \(c_{TbSb}\)
+          over segment \(T_bS_b\), where \(T_b\) is the foot of angle
+          bisector \(t_b\) (i.e., its intersection with line \(b\)),
+          and \(S_b\) is the foot of outer angle bisector \(s_b\)
+          (i.e., its intersection with line \(b\)).
+        <li class="hover">Vertex \(C\) lies on the circle \(c_{TcSc}\)
+          over segment \(T_cS_c\), where \(T_c\) is the foot of angle
+          bisector \(t_c\) (i.e., its intersection with line \(c\)),
+          and \(S_c\) is the foot of outer angle bisector \(s_c\)
+          (i.e., its intersection with line \(c\)).
       </ul>
     </div>
     
@@ -103,90 +62,80 @@
   <script>
     DG.setup("mycanvas", { width: 500, height: 500, border: "1px solid #ccc"}, -20, 140, -50, 110);
 
+    const elements = [];
+    
     // triangle vertices
-    const A = RC.point(80, 85).color("black").label("A");
-    const B = RC.point(20, 40).color("black").label("B");
-    const C = RC.point(100, 30).color("black").label("C");
+    const A = RC.point(80, 85).color("black").label("A"); elements.push(A);
+    const B = RC.point(20, 40).color("black").label("B"); elements.push(B);
+    const C = RC.point(100, 30).color("black").label("C"); elements.push(C);
 
     // triangle sides
-    const AB = RC.segment(A, B).color("black").width(2);
-    const BC = RC.segment(B, C).color("black").width(2);
-    const AC = RC.segment(A, C).color("black").width(2);
+    const AB = RC.segment(A, B).color("black").width(2); elements.push(AB);
+    const BC = RC.segment(B, C).color("black").width(2); elements.push(BC);
+    const AC = RC.segment(A, C).color("black").width(2); elements.push(AC);
 
     // triangle side lines
-    const a = RC.line(B, C).label("a").color("black").width(0.5);
-    const b = RC.line(A, C).label("b").color("black").width(0.5);
-    const c = RC.line(A, B).label("c").color("black").width(0.5);
+    const a = RC.line(B, C).label("a").color("black").width(0.3); elements.push(a);
+    const b = RC.line(A, C).label("b").color("black").width(0.3); elements.push(b);
+    const c = RC.line(A, B).label("c").color("black").width(0.3); elements.push(c);
 
     // angle bisectors
-    const ta = RC.angle_bisector(B, A, C).color("orange").label("t_{a}"); 
-    const tb = RC.angle_bisector(A, B, C).color("orange").label("t_{b}"); 
-    const tc = RC.angle_bisector(B, C, A).color("orange").label("t_{c}");
+    const ta = RC.angle_bisector(B, A, C).color("orange").label("t_{a}"); elements.push(ta);
+    const tb = RC.angle_bisector(A, B, C).color("orange").label("t_{b}"); elements.push(tb); 
+    const tc = RC.angle_bisector(B, C, A).color("orange").label("t_{c}"); elements.push(tc);
+    
     // incenter
-    const I = RC.intersectLL(ta, tb).color("orange").label("I");
-
-    // angle bisector feet
-    const Ta = RC.intersectLL(ta, a).color("orange").label("T_{a}");
-    const Tb = RC.intersectLL(tb, b).color("orange").label("T_{b}");
-    const Tc = RC.intersectLL(tc, c).color("orange").label("T_{c}");
-
-    // out angle bisectors
-    const sa = RC.drop_perp(ta, A).color("tomato").width(1.5).label("s_{a}");
-    const sb = RC.drop_perp(tb, B).color("tomato").width(1.5).label("s_{b}");
-    const sc = RC.drop_perp(tc, C).color("tomato").width(1.5).label("s_{c}");
-    
-    // outcircle centers
-    const Ia = RC.intersectLL(sb, sc).color("tomato").label("I_{a}");
-    const Ib = RC.intersectLL(sa, sc).color("tomato").label("I_{b}");
-    const Ic = RC.intersectLL(sa, sb).color("tomato").label("I_{c}");
-    
-    // outcenters projection feet
-    const Spa = RC.foot(a, Ia).color("tomato").label("S'_{a}");
-    const Spb = RC.foot(b, Ib).color("tomato").label("S'_{b}");
-    const Spc = RC.foot(c, Ic).color("tomato").label("S'_{b}");
-
-    RC.segment(Ia, Spa).color("tomato").dashed();
-    RC.segment(Ib, Spb).color("tomato").dashed();
-    RC.segment(Ic, Spc).color("tomato").dashed();
-    
-    // outcircles
-    const ia = RC.circle(Ia, Spa).color("tomato").label("i_{a}");
-    const ib = RC.circle(Ib, Spb).color("tomato").label("i_{b}");
-    const ic = RC.circle(Ic, Spc).color("tomato").label("i_{c}");
-
-    // out angle bisector feet
-    const Sa = RC.intersectLL(sa, a).color("tomato").label("S_{a}");
-    const Sb = RC.intersectLL(sb, b).color("tomato").label("S_{b}");
-    const Sc = RC.intersectLL(sc, c).color("tomato").label("S_{c}");
-
-    // circles over segments formed by inner and outer angle bisector feet
-    const cTaSa = RC.circle_over_segment(Ta, Sa).color("steelblue").dashed().width(2);
-    const cTbSb = RC.circle_over_segment(Tb, Sb).color("steelblue").dashed().width(2);
-    const cTcSc = RC.circle_over_segment(Tc, Sc).color("steelblue").dashed().width(2);
-
-    // side midpoints
-    const Ma = RC.midpoint(B, C).color("green").label("M_{a}");
-    const Mb = RC.midpoint(A, C).color("green").label("M_{b}");
-    const Mc = RC.midpoint(A, B).color("green").label("M_{c}");
+    const I = RC.intersectLL(ta, tb).color("orange").label("I"); elements.push(I);
 
     // incenter projection feet
-    const Tpa = RC.foot(a, I).color("Chocolate").label("T'_{a}");
-    const Tpb = RC.foot(b, I).color("Chocolate").label("T'_{b}");
-    const Tpc = RC.foot(c, I).color("Chocolate").label("T'_{c}");
+    // hidden
+    const Tpa = RC.foot(a, I).color("rgba(210, 105, 30, 0.3)").size(0.7).hide(); elements.push(Tpa);
+    const Tpb = RC.foot(b, I).color("rgba(210, 105, 30, 0.3)").size(0.7).hide(); elements.push(Tpb);
+    const Tpc = RC.foot(c, I).color("rgba(210, 105, 30, 0.3)").size(0.7).hide(); elements.push(Tpc);
+    
+    // incircle
+    const i = RC.circle(I, Tpa).color("orange").label("i").width(2); elements.push(i);
+    
+    // angle bisector feet
+    const Ta = RC.intersectLL(ta, a).color("orange").label("T_{a}"); elements.push(Ta);
+    const Tb = RC.intersectLL(tb, b).color("orange").label("T_{b}"); elements.push(Tb);
+    const Tc = RC.intersectLL(tc, c).color("orange").label("T_{c}"); elements.push(Tc);
 
-    RC.segment(I, Tpa).color("Chocolate").dashed();
-    RC.segment(I, Tpb).color("Chocolate").dashed();
-    RC.segment(I, Tpc).color("Chocolate").dashed();
+    // out angle bisectors
+    const sa = RC.drop_perp(ta, A).color("tomato").width(1.5).label("s_{a}"); elements.push(sa);
+    const sb = RC.drop_perp(tb, B).color("tomato").width(1.5).label("s_{b}"); elements.push(sb);
+    const sc = RC.drop_perp(tc, C).color("tomato").width(1.5).label("s_{c}"); elements.push(sc);
+    
+    // outcircle centers
+    const Ia = RC.intersectLL(sb, sc).color("tomato").label("I_{a}"); elements.push(Ia);
+    const Ib = RC.intersectLL(sa, sc).color("tomato").label("I_{b}"); elements.push(Ib);
+    const Ic = RC.intersectLL(sa, sb).color("tomato").label("I_{c}"); elements.push(Ic);
+    
+    // outcenters projection feet
+    // hidden
+    const Spa = RC.foot(a, Ia).color("rgba(255, 99, 71, 0.3)").size(0.7).hide(); elements.push(Spa);
+    const Spb = RC.foot(b, Ib).color("rgba(255, 99, 71, 0.3)").size(0.7).hide(); elements.push(Spb);
+    const Spc = RC.foot(c, Ic).color("rgba(255, 99, 71, 0.3)").size(0.7).hide(); elements.push(Spc);
 
-    // parallel lines
-    RC.line(I, Ma).color("DarkGray").width(1.5);
-    RC.line(A, Spa).color("DarkGray").width(1.5);
+    // outcircles
+    const ia = RC.circle(Ia, Spa).color("tomato").label("i_{a}").width(2); elements.push(ia);
+    const ib = RC.circle(Ib, Spb).color("tomato").label("i_{b}").width(2); elements.push(ib);
+    const ic = RC.circle(Ic, Spc).color("tomato").label("i_{c}").width(2); elements.push(ic);
 
-    RC.line(I, Mb).color("DarkGray").width(1.5);
-    RC.line(B, Spb).color("DarkGray").width(1.5);
+    // out angle bisector feet
+    const Sa = RC.intersectLL(sa, a).color("tomato").label("S_{a}"); elements.push(Sa);
+    const Sb = RC.intersectLL(sb, b).color("tomato").label("S_{b}"); elements.push(Sb);
+    const Sc = RC.intersectLL(sc, c).color("tomato").label("S_{c}"); elements.push(Sc);
 
-    RC.line(I, Mc).color("DarkGray").width(1.5);
-    RC.line(C, Spc).color("DarkGray").width(1.5);
+    // circles over segments formed by inner and outer angle bisector feet
+    const cTaSa = RC.circle_over_segment(Ta, Sa).label("c_{TaSa}").color("steelblue").dashed().width(2); elements.push(cTaSa);
+    const TaSa = RC.segment(Ta, Sa).label("T_aS_a").color("lightsteelblue"); elements.push(TaSa);
+    const cTbSb = RC.circle_over_segment(Tb, Sb).label("c_{TbSb}").color("steelblue").dashed().width(2); elements.push(cTbSb);
+    const TbSb = RC.segment(Tb, Sb).label("T_bS_b").color("lightsteelblue"); elements.push(TbSb);
+    const cTcSc = RC.circle_over_segment(Tc, Sc).label("c_{TcSc}").color("steelblue").dashed().width(2); elements.push(cTcSc);
+    const TcSc = RC.segment(Tc, Sc).label("T_cS_c").color("lightsteelblue"); elements.push(TcSc);
+
+    hoverDGElements([...document.getElementsByClassName("hover")], elements, 0.3);
   </script>
 </body>
 </html>

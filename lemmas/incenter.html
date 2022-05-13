@@ -7,6 +7,7 @@
     <script src="https://cdn.jsdelivr.net/gh/filipmaric/ArgoDG/dist/DG.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/filipmaric/ArgoDG/dist/RC.js"></script>
     
+    <script src="hoverDGElements.js"></script>
     <link rel="stylesheet" href="lemmas.css" /> 
   </head>
 <body>
@@ -21,14 +22,14 @@
     <div class="lemma">
       <b>Proposition:</b>
       <ul>
-        <li>Angle bisector \(t_a\) contains vertex \(A\).
-        <li>Angle bisector \(t_b\) contains vertex \(B\).
-        <li>Angle bisector \(t_c\) contains vertex \(C\).
+        <li class="hover">Angle bisector \(t_a\) contains vertex \(A\).
+        <li class="hover">Angle bisector \(t_b\) contains vertex \(B\).
+        <li class="hover">Angle bisector \(t_c\) contains vertex \(C\).
       </ul>
     </div>
     
     <!--- D2, L2 --->
-    <div class="lemma">
+    <div class="lemma hover">
       <b>Proposition:</b> All three angle bisectors \(t_a\), \(t_b\), and \(t_c\) meet in a single point (incenter \(I\)).
     </div>
 
@@ -36,67 +37,91 @@
     <div class="lemma">
       <b>Proposition:</b> 
       <ul>
-        <li>Angle between side \(c\) and angle bisector
+        <li class="hover">Angle between side \(c\) and angle bisector
         \(t_a\) is equal to angle between angle bisector \(t_a\) and
         side \(b\).
-        <li>Angle between side \(a\) and angle bisector
+        <li class="hover">Angle between side \(a\) and angle bisector
         \(t_b\) is equal to angle between angle bisector \(t_b\) and
         side \(c\).
-        <li>Angle between side \(b\) and angle bisector
+        <li class="hover">Angle between side \(b\) and angle bisector
         \(t_c\) is equal to angle between angle bisector \(t_c\) and
         side \(a\).
       </ul>
     </div>
 
     <!--- D27, L13, L14 --->
-    <div class="lemma">
+    <div class="lemma hover">
       <b>Proposition:</b> Incircle \(i\) is the circle centered at the
       incenter \(I\) that contains feet \(T'_a\), \(T'_b\), and \(T'_c\)
       of normals from incenter \(I\) onto sides \(a\), \(b\), and
       \(c\).
     </div>
 
+
     <!--- L59, L60, L61 --->
     <div class="lemma">
-      <b>Proposition:</b> All three sides of the triangle \(a\), \(b\)
-      and \(c\) are tangent to incenter \(i\).
+      <b>Proposition:</b>
+      <ul>
+        <li class="hover">Side \(a\) is tangent to the incircle \(i\) at foot
+          \(T'_a\) of normal projection of incenter \(I\) onto side
+          \(a\).
+        <li class="hover">Side \(b\) is tangent to the incircle \(i\) at foot
+          \(T'_b\) of normal projection of incenter \(I\) onto side
+          \(b\).
+        <li class="hover">Side \(c\) is tangent to the incircle \(i\) at foot
+          \(T'_c\) of normal projection of incenter \(I\) onto side
+          \(c\).
+      </ul>
     </div>
-    
   </div>
 
 
   <script>
     DG.setup("mycanvas", { width: 500, height: 500, border: "1px solid #ccc"}, 0, 120, 0, 120);
 
-    const A = RC.point(75, 95).color("black").label("A");
-    const B = RC.point(15, 40).color("black").label("B");
-    const C = RC.point(105, 40).color("black").label("C");
-
-    const AB = RC.segment(A, B).color("black").width(2);
-    const BC = RC.segment(B, C).color("black").width(2);
-    const AC = RC.segment(A, C).color("black").width(2);
-
-    const a = RC.line(B, C).label("a").color("black").width(0.5);
-    const b = RC.line(A, C).label("b").color("black").width(0.5);
-    const c = RC.line(A, B).label("c").color("black").width(0.5);
+    const elements = [];
     
-    const ta = RC.angle_bisector(B, A, C).color("orange").label("t_{a}"); 
-    const tb = RC.angle_bisector(A, B, C).color("orange").label("t_{b}"); 
-    const tc = RC.angle_bisector(B, C, A).color("orange").label("t_{c}");
-    const I = RC.intersectLL(ta, tb).color("orange").label("I");
+    // vertices
+    const A = RC.point(75, 95).color("black").label("A"); elements.push(A);
+    const B = RC.point(15, 40).color("black").label("B"); elements.push(B);
+    const C = RC.point(105, 40).color("black").label("C"); elements.push(C);
 
-    const tpa = RC.drop_perp(a, I).color("Chocolate").label("t'_{a}").dashed();
-    const tpb = RC.drop_perp(b, I).color("Chocolate").label("t'_{b}").dashed();
-    const tpc = RC.drop_perp(c, I).color("Chocolate").label("t'_{c}").dashed();
+    // segments
+    const AB = RC.segment(A, B).color("black").width(2); elements.push(AB);
+    const BC = RC.segment(B, C).color("black").width(2); elements.push(BC);
+    const AC = RC.segment(A, C).color("black").width(2); elements.push(AC);
+
+    // sides
+    const a = RC.line(B, C).label("a").color("black").width(0.5); elements.push(a);
+    const b = RC.line(A, C).label("b").color("black").width(0.5); elements.push(b);
+    const c = RC.line(A, B).label("c").color("black").width(0.5); elements.push(c);
     
-    const Tpa = RC.intersectLL(tpa, a).color("Chocolate").label("T'_{a}");
-    const Tpb = RC.intersectLL(tpb, b).color("Chocolate").label("T'_{b}");
-    const Tpc = RC.intersectLL(tpc, c).color("Chocolate").label("T'_{c}");
-    const ITpa = RC.segment(I, Tpa).color("Chocolate").width(1.5);
-    const ITpb = RC.segment(I, Tpb).color("Chocolate").width(1.5);
-    const ITpc = RC.segment(I, Tpc).color("Chocolate").width(1.5);
+    // angle bisectors
+    const ta = RC.angle_bisector(B, A, C).color("orange").label("t_{a}"); elements.push(ta);
+    const tb = RC.angle_bisector(A, B, C).color("orange").label("t_{b}"); elements.push(tb);
+    const tc = RC.angle_bisector(B, C, A).color("orange").label("t_{c}"); elements.push(tc);
 
-    const i = RC.circle(I, Tpa).color("orange").label("i");
+    // incenter
+    const I = RC.intersectLL(ta, tb).color("orange").label("I");  elements.push(I);
+
+    // incenter perpendicular projections onto triangle sides
+    const tpa = RC.drop_perp(a, I).color("Chocolate").label("t'_{a}").dashed(); elements.push(tpa);
+    const tpb = RC.drop_perp(b, I).color("Chocolate").label("t'_{b}").dashed(); elements.push(tpb);
+    const tpc = RC.drop_perp(c, I).color("Chocolate").label("t'_{c}").dashed(); elements.push(tpc);
+    
+    // incenter projection feet
+    const Tpa = RC.intersectLL(tpa, a).color("Chocolate").label("T'_{a}"); elements.push(Tpa);
+    const Tpb = RC.intersectLL(tpb, b).color("Chocolate").label("T'_{b}"); elements.push(Tpb);
+    const Tpc = RC.intersectLL(tpc, c).color("Chocolate").label("T'_{c}"); elements.push(Tpc);
+    
+    const ITpa = RC.segment(I, Tpa).color("Chocolate").width(1.5); elements.push(ITpa);
+    const ITpb = RC.segment(I, Tpb).color("Chocolate").width(1.5); elements.push(ITpb);
+    const ITpc = RC.segment(I, Tpc).color("Chocolate").width(1.5); elements.push(ITpc);
+
+    // incircle
+    const i = RC.circle(I, Tpa).color("orange").label("i").width(2); elements.push(i);
+
+    hoverDGElements([...document.getElementsByClassName("hover")], elements);
   </script>
 </body>
 </html>
