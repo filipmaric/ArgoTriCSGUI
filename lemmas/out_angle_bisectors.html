@@ -34,16 +34,35 @@
           that is the center of excircle \(i_c\).
       </ul>
     </div>
+
+    <!--- D91, D92, D93 --->
+    <div class="lemma">
+      <b>Proposition:</b>
+      <ul>
+        <li class="hover">Outer angle bisector foot \(S_a\) is the
+        intersection of outer angle bisector \(s_a\) and line \(a\).
+        <li class="hover">Outer angle bisector foot \(S_b\) is the
+        intersection of outer angle bisector \(s_b\) and line \(b\).
+        <li class="hover">Outer angle bisector foot \(S_c\) is the
+        intersection of outer angle bisector \(s_c\) and line \(c\).
+      </ul>
+    </div>
+
+    <!--- ??? --->
+    <div class="lemma hover">
+      <b>Proposition:</b> Outer angle bisector feet \(S_a\), \(S_b\),
+      and \(S_c\) are collinear and belong to line \(s\).
+    </div>
     
     <!--- L71, L72, L73 --->
     <div class="lemma">
       <b>Proposition:</b>
       <ul>
-        <li class="hover">Vertex \(A\) lies on the circle \(c_{TaSa}\) over segment \(T_aS_a\),
-          where \(T_a\) is the foot of angle bisector \(t_a\) (i.e.,
-          its intersection with line \(a\)), and \(S_a\) is the foot
-          of outer angle bisector \(s_a\) (i.e., its intersection with
-          line \(a\)).
+        <li class="hover">Vertex \(A\) lies on the circle \(c_{TaSa}\)
+          over segment \(T_aS_a\), where \(T_a\) is the foot of angle
+          bisector \(t_a\) (i.e., its intersection with line \(a\)),
+          and \(S_a\) is the foot of outer angle bisector \(s_a\)
+          (i.e., its intersection with line \(a\)).
         <li class="hover">Vertex \(B\) lies on the circle \(c_{TbSb}\)
           over segment \(T_bS_b\), where \(T_b\) is the foot of angle
           bisector \(t_b\) (i.e., its intersection with line \(b\)),
@@ -127,6 +146,8 @@
     const Sb = RC.intersectLL(sb, b).color("tomato").label("S_{b}"); elements.push(Sb);
     const Sc = RC.intersectLL(sc, c).color("tomato").label("S_{c}"); elements.push(Sc);
 
+    const s = RC.line(Sa, Sb).color("tomato").label("s"); elements.push(s);
+    
     // circles over segments formed by inner and outer angle bisector feet
     const cTaSa = RC.circle_over_segment(Ta, Sa).label("c_{TaSa}").color("steelblue").dashed().width(2); elements.push(cTaSa);
     const TaSa = RC.segment(Ta, Sa).label("T_aS_a").color("lightsteelblue"); elements.push(TaSa);

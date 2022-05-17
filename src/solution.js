@@ -1,4 +1,5 @@
 import { laTeX2HTML } from 'ArgoDG/src/dg/latex.js';
+import * as DG from 'ArgoDG/src/dg/dg.js';
 import * as RC from 'ArgoDG/src/dg/rc.js';
 import { DGObject } from 'ArgoDG/src/dg/objects.js';
 import { Construction } from 'ArgoDG/src/dg/construction.js';
@@ -8,15 +9,16 @@ const W = {
     W01: (X, Z, W, p, q) => RC.towards(Z, W, X, q, p),
     W02: RC.line,
     W03: RC.intersectLL,
-    W04: RC.intersectLC,
+    W04: RC.intersectLC_both,
     W05: (c, l, O, A) => RC.intersectLC_other(l, c, A),
     W05a: (c, l, O, A) => RC.intersectLC_other(l, c, A),
     W06: (X, Y) => RC.circle(Y, X),
-    W07: RC.intersectCC,
+    W07: RC.intersectCC_both,
     W08: RC.intersectCC_other,
     W09: RC.circle_over_segment,
     W10: RC.drop_perp,
     W10a: (A, l) => RC.drop_perp(l, A),
+    W10b: (A, l) => RC.drop_perp(l, A),
     W11: RC.touching_circle,
     W12: RC.tangents,
     W13: (c, A, O, t) => other_tangent(A, c, t),
@@ -30,13 +32,14 @@ const W = {
 // Solution given by ArgoTriCS (parsed from JSON file)
 class Solution {
     constructor(solutionJSON) {
-        // dictionary mapping object names to construction steps and constructed objects
+        // dictionary mapping object names to construction steps and
+        // constructed objects
         this._solution = {}
         // ordered list of steps
         this._steps = []
         // ArgoDG construction - ordered list of objects 
         this._construction = new Construction();
-
+        
         // load solution from JSON
         this.loadFromJSON(solutionJSON)
         
@@ -66,9 +69,10 @@ class Solution {
 
     // load from ArgoTriCS exported JSON
     loadFromJSON(JSON) {
+        const origConstruction = DG.construction();
+        DG.setConstruction(this.construction());
         JSON.forEach(step => {
             const obj = W[step.construction](...step.params.map(name => name in this._solution ? this._solution[name]["object"] : name));
-
             var self = this;
             function addObject(obj, name, step) {
                 obj.label(name);
@@ -84,7 +88,6 @@ class Solution {
                     "step": step_copy
                 };
                 self._steps.push(step_copy);
-                self._construction.addObject(obj);
             }
 
             if (typeof step.name === "string")
@@ -96,9 +99,11 @@ class Solution {
                 addObject(obj[1], step.name[1], step);
             }
         });
+        DG.setConstruction(origConstruction);
     }
 
-    // names of objects that are free in the construction (initially given objects)
+    // names of objects that are free in the construction (initially
+    // given objects)
     givenObjects() {
         return Object.keys(this._solution).filter(name => this.step(name).construction == "free");
     }

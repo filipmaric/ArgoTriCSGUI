@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+  <head>
+    <title>P points</title>
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>    
+
+    <script src="https://cdn.jsdelivr.net/gh/filipmaric/ArgoDG/dist/DG.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/filipmaric/ArgoDG/dist/RC.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/filipmaric/ArgoDG/dist/ComplexGeom.js"></script>
+    
+    <script src="hoverDGElements.js"></script>
+    
+    <link rel="stylesheet" href="lemmas.css" /> 
+  </head>
+<body>
+  <h1>P points</h1>
+  
+  <div id="figure">
+    <canvas id="mycanvas"></canvas>
+  </div>
+  
+  <div id="lemmas">
+    <!--- D79, D80, D81 --->
+    <div class="lemma"><b>Proposition:</b>
+      <ul>
+        <li class="hover">Point \(P_a\) is the intersection of
+        altitude \(h_a\) and circle \(c_{EaMa}\) (circle centered at
+        Euler point \(E_a\) that contains midpoint \(M_a\)).
+        <li class="hover">Point \(P_b\) is the intersection of
+        altitude \(h_b\) and circle \(c_{EbMb}\) (circle centered at
+        Euler point \(E_b\) that contains midpoint \(M_b\)).
+        <li class="hover">Point \(P_c\) is the intersection of
+        altitude \(h_c\) and circle \(c_{EcMc}\) (circle centered at
+        Euler point \(E_c\) that contains midpoint \(M_c\)).
+      </ul>
+    </div>
+
+    <div class="lemma"><b>Proposition:</b>
+      <ul>
+        <li class="hover">Line \(P_{a}M_{a}\) (that joins p-point
+        \(P_a\) and midpoint \(M_a\)) and angle bisector \(t_a\) are
+        parallel.
+        <li class="hover">Line \(P_{b}M_{b}\) (that joins p-point
+        \(P_b\) and midpoint \(M_b\)) and angle bisector \(t_b\) are
+        parallel.
+        <li class="hover">Line \(P_{c}M_{c}\) (that joins p-point
+        \(P_c\) and midpoint \(M_c\)) and angle bisector \(t_c\) are
+        parallel.
+      </ul>
+    </div>    
+  </div>
+
+  <script>
+    DG.setup("mycanvas", { width: 500, height: 500, border: "1px solid #ccc"}, 0, 120, 0, 120);
+
+    const elements = [];
+    
+    const A = RC.point(80, 90).color("black").label("A"); elements.push(A);
+    const B = RC.point(10, 40).color("black").label("B"); elements.push(B);
+    const C = RC.point(90, 40).color("black").label("C"); elements.push(C);
+
+    const AB = RC.segment(A, B).color("black").width(2); elements.push(AB);
+    const BC = RC.segment(B, C).color("black").width(2); elements.push(BC);
+    const AC = RC.segment(A, C).color("black").width(2); elements.push(AC);
+
+    const a = RC.line(B, C).label("a").color("black").width(0.5); elements.push(a);
+    const b = RC.line(A, C).label("b").color("black").width(0.5); elements.push(b);
+    const c = RC.line(A, B).label("c").color("black").width(0.5); elements.push(c);
+
+    const ha = RC.drop_perp(a, A).color("red").label("h_{a}"); elements.push(ha);
+    const hb = RC.drop_perp(b, B).color("red").label("h_{b}"); elements.push(hb);
+    const hc = RC.drop_perp(c, C).color("red").label("h_{c}"); elements.push(hc);
+    const H = RC.intersectLL(ha, hb).color("red").label("H"); elements.push(H);
+    
+    const Ea = RC.midpoint(H, A).color("purple").label("E_{a}"); elements.push(Ea);
+    const Eb = RC.midpoint(H, B).color("purple").label("E_{b}"); elements.push(Eb);
+    const Ec = RC.midpoint(H, C).color("purple").label("E_{c}"); elements.push(Ec);
+    
+    const Ma = RC.midpoint(B, C).color("green").label("M_{a}"); elements.push(Ma);
+    const Mb = RC.midpoint(A, C).color("green").label("M_{b}"); elements.push(Mb);
+    const Mc = RC.midpoint(A, B).color("green").label("M_{c}"); elements.push(Mc);
+
+    // angle bisectors
+    const ta = RC.angle_bisector(B, A, C).color("orange").label("t_{a}"); elements.push(ta);
+    const tb = RC.angle_bisector(A, B, C).color("orange").label("t_{b}"); elements.push(tb);
+    const tc = RC.angle_bisector(B, C, A).color("orange").label("t_{c}"); elements.push(tc);
+    
+    const cEaMa = RC.circle(Ea, Ma).color("indigo").label("c_{EaMa}"); elements.push(cEaMa);
+    const cEbMb = RC.circle(Eb, Mb).color("indigo").label("c_{EbMb}"); elements.push(cEbMb);
+    const cEcMc = RC.circle(Ec, Mc).color("indigo").label("c_{EcMc}"); elements.push(cEcMc);
+
+    const Pa = DG.intersectLC(ha, cEaMa).select(p => ComplexGeom.Circline.between(p, A.cp1(), Ea.cp1())).label("P_{a}").color("indigo"); elements.push(Pa);
+    const Pb = DG.intersectLC(hb, cEbMb).select(p => ComplexGeom.Circline.between(p, B.cp1(), Eb.cp1())).label("P_{b}").color("indigo"); elements.push(Pb);
+    const Pc = DG.intersectLC(hc, cEcMc).select(p => ComplexGeom.Circline.between(p, C.cp1(), Ec.cp1())).label("P_{c}").color("indigo"); elements.push(Pc);
+
+    const PaMa = RC.line(Pa, Ma).color("indigo").label("P_{a}M_{a}", false); elements.push(PaMa);
+    const PbMb = RC.line(Pb, Mb).color("indigo").label("P_{b}M_{b}", false); elements.push(PbMb);
+    const PcMc = RC.line(Pc, Mc).color("indigo").label("P_{c}M_{c}", false); elements.push(PcMc);
+
+    hoverDGElements([...document.getElementsByClassName("hover")], elements);
+  </script>
+</body>
+</html>

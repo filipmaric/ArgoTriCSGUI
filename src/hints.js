@@ -1,11 +1,13 @@
 import { laTeX2HTML } from 'ArgoDG/src/dg/latex.js';
+import { Construction } from 'ArgoDG/src/dg/construction.js';
 
 class Hints {
-    constructor(solution, userConstruction, element) {
+    constructor(solution, userConstruction, view, element) {
         this._solution = solution;
         this._user_construction = userConstruction;
         this._given = this._solution.constructedVertices().map(name => { return {name: name, describe: false}; });
-        this._objects = [];
+        this._objects = new Construction();
+        this._objects.setView(view);
         this._element = element;
     }
 
@@ -27,9 +29,9 @@ class Hints {
     showObjects() {
         this._given.forEach(hint => {
             if (!this._objects.includes(hint.name)) {
-                this._objects.push(hint.name);
                 const o = this._solution.object(hint.name).clone();
-                o.color("rgba(255, 0, 0, 0.3)").dashed().show();
+                o.color("red").opacity("0.3").dashed().show();
+                this._objects.addObject(o);
             }
         });
     }
@@ -135,6 +137,7 @@ class Hints {
     remove(name) {
         this._given = this._given.filter(hint => hint.name != name);
         this.removeDeprecated();
+        this._objects.removeObject(this._objects.find(name));
         this.show();
     }
 }
