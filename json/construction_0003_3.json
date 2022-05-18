@@ -1,0 +1,48 @@
+"construction" =
+[
+{"type": "point", "name": "A", "construction": "free", "params": [80, 95], "color": "red", "intriangle": ["vertex", ["A"]]},
+{"type": "point", "name": "B", "construction": "free", "params": [20, 40], "color": "red", "intriangle": ["vertex", ["B"]]},
+{"type": "point", "name": "M_{a}", "construction": "free", "params": [65, 40], "color": "red", "intriangle": ["midpoint", ["B","C"]]},
+
+{"type": "circle", "name": "k(M_{a},B)", "construction": "W06",
+"params": ["B","M_{a}"],
+"props": [[["inc_k", "B","k(M_{a},B)"], ["GD02"]],[["center", "M_{a}","k(M_{a},B)"], ["GD02"]]],
+"ndg": [["not_eq_point", "B","M_{a}"] ], "det": [],
+"lemmas": ["GD02"],
+"intriangle": ["circle_center_through", ["M_{a}","B"]]},
+
+{"type": "line", "name": "m_{c}", "construction": "W14",
+"params": ["A","B"],
+"props": [],
+"ndg": [], "det": [["not_eq_point", "A","B"] ],
+"lemmas": [],
+"intriangle": ["side_bis", ["A","B"]]},
+
+{"type": "line", "name": "c", "construction": "W10a",
+"params": ["A","m_{c}"],
+"props": [[["inc", "A","c"], ["GD01"]],[["perp", "m_{c}","c"], ["D13"]]],
+"ndg": [], "det": [],
+"lemmas": ["D13","GD01"],
+"intriangle": ["line", ["A","B"]]},
+
+{"type": "point", "name": "H_{c}", "construction": "W05",
+"params": ["k(M_{a},B)","c","M_{a}","B"],
+"props": [[["inc", "H_{c}","c"], ["D7"]],[["inc", "B","c"], ["GD01"]],[["inc_k", "H_{c}","k(M_{a},B)"], ["L39"]],[["inc_k", "B","k(M_{a},B)"], ["GD02"]],[["center", "M_{a}","k(M_{a},B)"], ["GD02"]]],
+"ndg": [["intersect_line_circle", "c","k(M_{a},B)"] ], "det": [["not_eq_point", "B","H_{c}"] ],
+"lemmas": ["GD02","L39","GD01","D7"],
+"intriangle": ["foot", ["C","A","B"]]},
+
+{"type": "line", "name": "h_{c}", "construction": "W10b",
+"params": ["H_{c}","c"],
+"props": [[["inc", "H_{c}","h_{c}"], ["D7"]],[["perp", "h_{c}","c"], ["D10"]]],
+"ndg": [], "det": [],
+"lemmas": ["D10","D7"],
+"intriangle": ["altitude", ["C","A","B"]]},
+
+{"type": "point", "name": "C", "construction": "W05",
+"params": ["k(M_{a},B)","h_{c}","M_{a}","H_{c}"],
+"props": [[["inc", "C","h_{c}"], ["D10"]],[["inc", "H_{c}","h_{c}"], ["D7"]],[["inc_k", "C","k(M_{a},B)"], ["L37"]],[["inc_k", "H_{c}","k(M_{a},B)"], ["L39"]],[["center", "M_{a}","k(M_{a},B)"], ["GD02"]]],
+"ndg": [["intersect_line_circle", "h_{c}","k(M_{a},B)"] ], "det": [["not_eq_point", "H_{c}","C"] ],
+"lemmas": ["GD02","L39","L37","D7","D10"],
+"intriangle": ["vertex", ["C"]]}
+];

@@ -1,0 +1,48 @@
+"construction" =
+[
+{"type": "point", "name": "A", "construction": "free", "params": [80, 95], "color": "red", "intriangle": ["vertex", ["A"]]},
+{"type": "point", "name": "M_{b}", "construction": "free", "params": [95, 67.5], "color": "red", "intriangle": ["midpoint", ["A","C"]]},
+{"type": "point", "name": "T_{c}", "construction": "free", "params": [55.38, 72.43], "color": "red", "intriangle": ["angle_bis_foot", ["C","A","B"]]},
+
+{"type": "point", "name": "C", "construction": "W01",
+"params": ["A","A","M_{b}", 2, 1],
+"props": [[["sratio", "C","A","M_{b}","2","1"], ["GL03","GL04","D22"]]],
+"ndg": [], "det": [],
+"lemmas": ["GL03","GL04","D22"],
+"intriangle": ["vertex", ["C"]]},
+
+{"type": "line", "name": "b", "construction": "W02",
+"params": ["A","M_{b}"],
+"props": [[["inc", "M_{b}","b"], ["GL09","D22","GD01"]],[["inc", "A","b"], ["GD01"]]],
+"ndg": [], "det": [["not_eq_point", "A","M_{b}"] ],
+"lemmas": ["GL09","D22","GD01"],
+"intriangle": ["line", ["A","C"]]},
+
+{"type": "line", "name": "c", "construction": "W02",
+"params": ["A","T_{c}"],
+"props": [[["inc", "T_{c}","c"], ["D25"]],[["inc", "A","c"], ["GD01"]]],
+"ndg": [], "det": [["not_eq_point", "A","T_{c}"] ],
+"lemmas": ["GD01","D25"],
+"intriangle": ["line", ["A","B"]]},
+
+{"type": "circle", "name": "k(T_{c},foot[T_{c},b])", "construction": "W11",
+"params": ["T_{c}","b"],
+"props": [[["center", "T_{c}","k(T_{c},foot[T_{c},b])"], ["GD02"]],[["perp_line_to_circ", "b","k(T_{c},foot[T_{c},b])"], ["GL10","L10"]]],
+"ndg": [["not_true", "inc(angle_bis_foot(c,[a,b]),line([a,c]))"] ], "det": [],
+"lemmas": ["GL10","L10","GD02"],
+"intriangle": ["circle_center_through", ["T_{c}","foot[T_{c},b]"]]},
+
+{"type": "line", "name": "a", "construction": "W13",
+"params": ["k(T_{c},foot[T_{c},b])","C","T_{c}","b"],
+"props": [[["inc", "C","b"], ["GD01"]],[["inc", "C","a"], ["GD01"]],[["center", "T_{c}","k(T_{c},foot[T_{c},b])"], ["GD02"]],[["perp_line_to_circ", "b","k(T_{c},foot[T_{c},b])"], ["GL10","L10"]],[["perp_line_to_circ", "a","k(T_{c},foot[T_{c},b])"], ["GL11","L10"]]],
+"ndg": [["out_of_circle", "C","k(T_{c},foot[T_{c},b])"] ], "det": [],
+"lemmas": ["GL11","GL10","L10","GD02","GD01"],
+"intriangle": ["line", ["B","C"]]},
+
+{"type": "point", "name": "B", "construction": "W03",
+"params": ["a","c"],
+"props": [[["inc", "B","c"], ["GD01"]],[["inc", "B","a"], ["GD01"]]],
+"ndg": [["not_parallel", "a","c"] ], "det": [["not_eq_line", "a","c"] ],
+"lemmas": ["GD01"],
+"intriangle": ["vertex", ["B"]]}
+];

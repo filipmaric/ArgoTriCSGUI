@@ -1,0 +1,62 @@
+"construction" =
+[
+{"type": "point", "name": "A", "construction": "free", "params": [80, 95], "color": "red", "intriangle": ["vertex", ["A"]]},
+{"type": "point", "name": "M_{a}", "construction": "free", "params": [65, 40], "color": "red", "intriangle": ["midpoint", ["B","C"]]},
+{"type": "point", "name": "T_{a}", "construction": "free", "params": [70.86, 40], "color": "red", "intriangle": ["angle_bis_foot", ["A","B","C"]]},
+
+{"type": "line", "name": "s_{a}", "construction": "W02",
+"params": ["A","T_{a}"],
+"props": [[["inc", "T_{a}","s_{a}"], ["D23"]],[["inc", "A","s_{a}"], ["L5"]]],
+"ndg": [], "det": [["not_eq_point", "A","T_{a}"] ],
+"lemmas": ["L5","D23"],
+"intriangle": ["angle_bis", ["A","B","C"]]},
+
+{"type": "line", "name": "a", "construction": "W02",
+"params": ["M_{a}","T_{a}"],
+"props": [[["inc", "T_{a}","a"], ["D23"]],[["inc", "M_{a}","a"], ["GL09","D21","GD01"]]],
+"ndg": [], "det": [["not_eq_point", "M_{a}","T_{a}"] ],
+"lemmas": ["GL09","D21","GD01","D23"],
+"intriangle": ["line", ["B","C"]]},
+
+{"type": "line", "name": "m_{a}", "construction": "W10b",
+"params": ["M_{a}","a"],
+"props": [[["inc", "M_{a}","m_{a}"], ["D11"]],[["perp", "m_{a}","a"], ["D11"]]],
+"ndg": [], "det": [],
+"lemmas": ["D11"],
+"intriangle": ["side_bis", ["B","C"]]},
+
+{"type": "point", "name": "N_{a}", "construction": "W03",
+"params": ["m_{a}","s_{a}"],
+"props": [[["inc", "N_{a}","s_{a}"], ["D47"]],[["inc", "N_{a}","m_{a}"], ["L25"]]],
+"ndg": [["not_parallel", "m_{a}","s_{a}"] ], "det": [["not_eq_line", "m_{a}","s_{a}"] ],
+"lemmas": ["L25","D47"],
+"intriangle": ["point_n", ["A","B","C"]]},
+
+{"type": "line", "name": "m(AN_{a})", "construction": "W14",
+"params": ["A","N_{a}"],
+"props": [],
+"ndg": [], "det": [["not_eq_point", "A","N_{a}"] ],
+"lemmas": [],
+"intriangle": ["side_bis", ["A","N_{a}"]]},
+
+{"type": "point", "name": "O", "construction": "W03",
+"params": ["m(AN_{a})","m_{a}"],
+"props": [[["inc", "O","m_{a}"], ["D1"]],[["inc", "O","m(AN_{a})"], ["GL01","L11","D47","D26"]]],
+"ndg": [["not_parallel", "m(AN_{a})","m_{a}"] ], "det": [["not_eq_line", "m(AN_{a})","m_{a}"] ],
+"lemmas": ["GL01","L11","D47","D26","D1"],
+"intriangle": ["circumcenter", ["A","B","C"]]},
+
+{"type": "circle", "name": "k(O,C)", "construction": "W06",
+"params": ["A","O"],
+"props": [[["inc_k", "A","k(O,C)"], ["L11"]],[["center", "O","k(O,C)"], ["D26"]]],
+"ndg": [["not_eq_point", "A","O"] ], "det": [],
+"lemmas": ["D26","L11"],
+"intriangle": ["circumcircle", ["A","B","C"]]},
+
+{"type": "point", "name": ["C", "B"], "construction": "W04",
+"params": ["k(O,C)","a"],
+"props": [[["inc", "B","a"], ["GD01"]],[["inc", "C","a"], ["GD01"]],[["inc_k", "B","k(O,C)"], ["L12"]],[["inc_k", "C","k(O,C)"], ["D26"]]],
+"ndg": [["intersect_line_circle", "a","k(O,C)"] ], "det": [],
+"lemmas": ["D26","L12","GD01"],
+"intriangle": [ ["vertex", ["C"]], ["vertex", ["B"]] ]}
+];

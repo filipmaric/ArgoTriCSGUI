@@ -1,0 +1,41 @@
+"construction" =
+[
+{"type": "point", "name": "A", "construction": "free", "params": [80, 95], "color": "red", "intriangle": ["vertex", ["A"]]},
+{"type": "point", "name": "B", "construction": "free", "params": [20, 40], "color": "red", "intriangle": ["vertex", ["B"]]},
+{"type": "point", "name": "H", "construction": "free", "params": [80, 72.73], "color": "red", "intriangle": ["orthocenter", ["A","B","C"]]},
+
+{"type": "line", "name": "h_{a}", "construction": "W02",
+"params": ["A","H"],
+"props": [[["inc", "H","h_{a}"], ["D3"]],[["inc", "A","h_{a}"], ["D8"]]],
+"ndg": [], "det": [["not_eq_point", "A","H"] ],
+"lemmas": ["D8","D3"],
+"intriangle": ["altitude", ["A","B","C"]]},
+
+{"type": "line", "name": "h_{b}", "construction": "W02",
+"params": ["B","H"],
+"props": [[["inc", "H","h_{b}"], ["D3"]],[["inc", "B","h_{b}"], ["D9"]]],
+"ndg": [], "det": [["not_eq_point", "B","H"] ],
+"lemmas": ["D9","D3"],
+"intriangle": ["altitude", ["B","A","C"]]},
+
+{"type": "line", "name": "b", "construction": "W10a",
+"params": ["A","h_{b}"],
+"props": [[["inc", "A","b"], ["GD01"]],[["perp", "h_{b}","b"], ["D9"]]],
+"ndg": [], "det": [],
+"lemmas": ["D9","GD01"],
+"intriangle": ["line", ["A","C"]]},
+
+{"type": "line", "name": "a", "construction": "W10a",
+"params": ["B","h_{a}"],
+"props": [[["inc", "B","a"], ["GD01"]],[["perp", "h_{a}","a"], ["D8"]]],
+"ndg": [], "det": [],
+"lemmas": ["D8","GD01"],
+"intriangle": ["line", ["B","C"]]},
+
+{"type": "point", "name": "C", "construction": "W03",
+"params": ["b","a"],
+"props": [[["inc", "C","a"], ["GD01"]],[["inc", "C","b"], ["GD01"]]],
+"ndg": [["not_parallel", "b","a"] ], "det": [["not_eq_line", "b","a"] ],
+"lemmas": ["GD01"],
+"intriangle": ["vertex", ["C"]]}
+];

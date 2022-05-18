@@ -1,0 +1,48 @@
+"construction" =
+[
+{"type": "point", "name": "A", "construction": "free", "params": [80, 95], "color": "red", "intriangle": ["vertex", ["A"]]},
+{"type": "point", "name": "O", "construction": "free", "params": [65, 51.14], "color": "red", "intriangle": ["circumcenter", ["A","B","C"]]},
+{"type": "point", "name": "H", "construction": "free", "params": [80, 72.73], "color": "red", "intriangle": ["orthocenter", ["A","B","C"]]},
+
+{"type": "point", "name": "G", "construction": "W01",
+"params": ["O","O","H", 1, 3],
+"props": [[["sratio", "G","O","H","1","3"], ["GL04","L58"]]],
+"ndg": [], "det": [],
+"lemmas": ["GL04","L58"],
+"intriangle": ["centroid", ["A","B","C"]]},
+
+{"type": "point", "name": "M_{a}", "construction": "W01",
+"params": ["A","A","G", 3, 2],
+"props": [[["sratio", "M_{a}","A","G","3","2"], ["GL03","L55"]]],
+"ndg": [], "det": [],
+"lemmas": ["GL03","L55"],
+"intriangle": ["midpoint", ["B","C"]]},
+
+{"type": "line", "name": "h_{a}", "construction": "W02",
+"params": ["A","H"],
+"props": [[["inc", "H","h_{a}"], ["D3"]],[["inc", "A","h_{a}"], ["D8"]]],
+"ndg": [], "det": [["not_eq_point", "A","H"] ],
+"lemmas": ["D8","D3"],
+"intriangle": ["altitude", ["A","B","C"]]},
+
+{"type": "circle", "name": "k(O,C)", "construction": "W06",
+"params": ["A","O"],
+"props": [[["inc_k", "A","k(O,C)"], ["L11"]],[["center", "O","k(O,C)"], ["D26"]]],
+"ndg": [["not_eq_point", "A","O"] ], "det": [],
+"lemmas": ["D26","L11"],
+"intriangle": ["circumcircle", ["A","B","C"]]},
+
+{"type": "line", "name": "a", "construction": "W10a",
+"params": ["M_{a}","h_{a}"],
+"props": [[["inc", "M_{a}","a"], ["GL09","D21","GD01"]],[["perp", "h_{a}","a"], ["D8"]]],
+"ndg": [], "det": [],
+"lemmas": ["D8","GL09","D21","GD01"],
+"intriangle": ["line", ["B","C"]]},
+
+{"type": "point", "name": ["C", "B"], "construction": "W04",
+"params": ["k(O,C)","a"],
+"props": [[["inc", "B","a"], ["GD01"]],[["inc", "C","a"], ["GD01"]],[["inc_k", "B","k(O,C)"], ["L12"]],[["inc_k", "C","k(O,C)"], ["D26"]]],
+"ndg": [["intersect_line_circle", "a","k(O,C)"] ], "det": [],
+"lemmas": ["D26","L12","GD01"],
+"intriangle": [ ["vertex", ["C"]], ["vertex", ["B"]] ]}
+];

@@ -1,0 +1,55 @@
+"construction" =
+[
+{"type": "point", "name": "A", "construction": "free", "params": [80, 95], "color": "red", "intriangle": ["vertex", ["A"]]},
+{"type": "point", "name": "O", "construction": "free", "params": [65, 51.14], "color": "red", "intriangle": ["circumcenter", ["A","B","C"]]},
+{"type": "point", "name": "I", "construction": "free", "params": [74.37, 61.15], "color": "red", "intriangle": ["incenter", ["A","B","C"]]},
+
+{"type": "circle", "name": "k(O,C)", "construction": "W06",
+"params": ["A","O"],
+"props": [[["inc_k", "A","k(O,C)"], ["L11"]],[["center", "O","k(O,C)"], ["D26"]]],
+"ndg": [["not_eq_point", "A","O"] ], "det": [],
+"lemmas": ["D26","L11"],
+"intriangle": ["circumcircle", ["A","B","C"]]},
+
+{"type": "line", "name": "m(AI)", "construction": "W14",
+"params": ["A","I"],
+"props": [],
+"ndg": [], "det": [["not_eq_point", "A","I"] ],
+"lemmas": [],
+"intriangle": ["side_bis", ["A","I"]]},
+
+{"type": "point", "name": ["N_{b}", "N_{c}"], "construction": "W04",
+"params": ["k(O,C)","m(AI)"],
+"props": [[["inc", "N_{c}","m(AI)"], ["GL01","L35","L36","GD02"]],[["inc", "N_{b}","m(AI)"], ["GL01","L34","GD02"]],[["inc_k", "N_{c}","k(O,C)"], ["D49"]],[["inc_k", "N_{b}","k(O,C)"], ["D48"]]],
+"ndg": [["intersect_line_circle", "m(AI)","k(O,C)"] ], "det": [],
+"lemmas": ["D48","D49","L34","GL01","L35","L36","GD02"],
+"intriangle": [ ["point_n", ["B","A","C"]], ["point_n", ["C","A","B"]] ]},
+
+{"type": "circle", "name": "k(N_{b},A)", "construction": "W06",
+"params": ["A","N_{b}"],
+"props": [[["inc_k", "A","k(N_{b},A)"], ["GD02"]],[["center", "N_{b}","k(N_{b},A)"], ["GD02"]]],
+"ndg": [["not_eq_point", "A","N_{b}"] ], "det": [],
+"lemmas": ["GD02"],
+"intriangle": ["circle_center_through", ["N_{b}","A"]]},
+
+{"type": "circle", "name": "k(N_{c},B)", "construction": "W06",
+"params": ["A","N_{c}"],
+"props": [[["inc_k", "A","k(N_{c},B)"], ["L35"]],[["center", "N_{c}","k(N_{c},B)"], ["GD02"]]],
+"ndg": [["not_eq_point", "A","N_{c}"] ], "det": [],
+"lemmas": ["GD02","L35"],
+"intriangle": ["circle_center_through", ["N_{c}","B"]]},
+
+{"type": "point", "name": "C", "construction": "W08",
+"params": ["k(O,C)","k(N_{b},A)","A","O","N_{b}"],
+"props": [[["center", "N_{b}","k(N_{b},A)"], ["GD02"]],[["center", "O","k(O,C)"], ["D26"]],[["inc_k", "C","k(N_{b},A)"], ["L33"]],[["inc_k", "C","k(O,C)"], ["D26"]],[["inc_k", "A","k(N_{b},A)"], ["GD02"]],[["inc_k", "A","k(O,C)"], ["L11"]]],
+"ndg": [["intersect_circle_circle", "k(O,C)","k(N_{b},A)"] ], "det": [["not_eq_circle", "k(O,C)","k(N_{b},A)"] ,["not_eq_point", "A","C"] ],
+"lemmas": ["L11","L33","D26","GD02"],
+"intriangle": ["vertex", ["C"]]},
+
+{"type": "point", "name": "B", "construction": "W08",
+"params": ["k(O,C)","k(N_{c},B)","A","O","N_{c}"],
+"props": [[["center", "N_{c}","k(N_{c},B)"], ["GD02"]],[["center", "O","k(O,C)"], ["D26"]],[["inc_k", "B","k(N_{c},B)"], ["GD02"]],[["inc_k", "B","k(O,C)"], ["L12"]],[["inc_k", "A","k(N_{c},B)"], ["L35"]],[["inc_k", "A","k(O,C)"], ["L11"]]],
+"ndg": [["intersect_circle_circle", "k(O,C)","k(N_{c},B)"] ], "det": [["not_eq_circle", "k(O,C)","k(N_{c},B)"] ,["not_eq_point", "A","B"] ],
+"lemmas": ["L11","L35","L12","D26","GD02"],
+"intriangle": ["vertex", ["B"]]}
+];

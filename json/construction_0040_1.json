@@ -1,0 +1,20 @@
+"construction" =
+[
+{"type": "point", "name": "A", "construction": "free", "params": [80, 95], "color": "red", "intriangle": ["vertex", ["A"]]},
+{"type": "point", "name": "M_{a}", "construction": "free", "params": [65, 40], "color": "red", "intriangle": ["midpoint", ["B","C"]]},
+{"type": "point", "name": "M_{b}", "construction": "free", "params": [95, 67.5], "color": "red", "intriangle": ["midpoint", ["A","C"]]},
+
+{"type": "point", "name": "C", "construction": "W01",
+"params": ["A","A","M_{b}", 2, 1],
+"props": [[["sratio", "C","A","M_{b}","2","1"], ["GL03","GL04","D22"]]],
+"ndg": [], "det": [],
+"lemmas": ["GL03","GL04","D22"],
+"intriangle": ["vertex", ["C"]]},
+
+{"type": "point", "name": "B", "construction": "W01",
+"params": ["M_{a}","M_{a}","C", -1, 1],
+"props": [[["sratio", "B","M_{a}","C","-1","1"], ["GL04","GL03","D21"]]],
+"ndg": [], "det": [],
+"lemmas": ["GL04","GL03","D21"],
+"intriangle": ["vertex", ["B"]]}
+];

@@ -1,0 +1,27 @@
+"construction" =
+[
+{"type": "point", "name": "A", "construction": "free", "params": [80, 95], "color": "red", "intriangle": ["vertex", ["A"]]},
+{"type": "point", "name": "B", "construction": "free", "params": [20, 40], "color": "red", "intriangle": ["vertex", ["B"]]},
+{"type": "point", "name": "M_{a}", "construction": "free", "params": [65, 40], "color": "red", "intriangle": ["midpoint", ["B","C"]]},
+
+{"type": "line", "name": "a", "construction": "W02",
+"params": ["B","M_{a}"],
+"props": [[["inc", "M_{a}","a"], ["GL09","D21","GD01"]],[["inc", "B","a"], ["GD01"]]],
+"ndg": [], "det": [["not_eq_point", "B","M_{a}"] ],
+"lemmas": ["GL09","D21","GD01"],
+"intriangle": ["line", ["B","C"]]},
+
+{"type": "circle", "name": "k(M_{a},B)", "construction": "W06",
+"params": ["B","M_{a}"],
+"props": [[["inc_k", "B","k(M_{a},B)"], ["GD02"]],[["center", "M_{a}","k(M_{a},B)"], ["GD02"]]],
+"ndg": [["not_eq_point", "B","M_{a}"] ], "det": [],
+"lemmas": ["GD02"],
+"intriangle": ["circle_center_through", ["M_{a}","B"]]},
+
+{"type": "point", "name": "C", "construction": "W05a",
+"params": ["k(M_{a},B)","a","M_{a}","B"],
+"props": [[["inc", "M_{a}","a"], ["GL09","D21","GD01"]],[["inc", "C","a"], ["GD01"]],[["inc", "B","a"], ["GD01"]],[["inc_k", "C","k(M_{a},B)"], ["L37"]],[["inc_k", "B","k(M_{a},B)"], ["GD02"]],[["center", "M_{a}","k(M_{a},B)"], ["GD02"]]],
+"ndg": [["intersect_line_circle", "a","k(M_{a},B)"] ], "det": [["not_eq_point", "B","C"] ],
+"lemmas": ["GD02","L37","GL09","D21","GD01"],
+"intriangle": ["vertex", ["C"]]}
+];

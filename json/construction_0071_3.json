@@ -1,0 +1,62 @@
+"construction" =
+[
+{"type": "point", "name": "A", "construction": "free", "params": [80, 95], "color": "red", "intriangle": ["vertex", ["A"]]},
+{"type": "point", "name": "G", "construction": "free", "params": [70, 58.33], "color": "red", "intriangle": ["centroid", ["A","B","C"]]},
+{"type": "point", "name": "H_{b}", "construction": "free", "params": [89.36, 77.83], "color": "red", "intriangle": ["foot", ["B","A","C"]]},
+
+{"type": "point", "name": "M_{a}", "construction": "W01",
+"params": ["A","A","G", 3, 2],
+"props": [[["sratio", "M_{a}","A","G","3","2"], ["GL03","L55"]]],
+"ndg": [], "det": [],
+"lemmas": ["GL03","L55"],
+"intriangle": ["midpoint", ["B","C"]]},
+
+{"type": "line", "name": "m(AH_{b})", "construction": "W14",
+"params": ["A","H_{b}"],
+"props": [],
+"ndg": [], "det": [["not_eq_point", "A","H_{b}"] ],
+"lemmas": [],
+"intriangle": ["side_bis", ["A","H_{b}"]]},
+
+{"type": "line", "name": "h_{b}", "construction": "W16",
+"params": ["H_{b}","m(AH_{b})"],
+"props": [[["inc", "H_{b}","h_{b}"], ["D6"]]],
+"ndg": [], "det": [],
+"lemmas": ["D6"],
+"intriangle": ["altitude", ["B","A","C"]]},
+
+{"type": "line", "name": "b", "construction": "W10a",
+"params": ["A","h_{b}"],
+"props": [[["inc", "A","b"], ["GD01"]],[["perp", "h_{b}","b"], ["D9"]]],
+"ndg": [], "det": [],
+"lemmas": ["D9","GD01"],
+"intriangle": ["line", ["A","C"]]},
+
+{"type": "line", "name": "M_{c}M_{a}", "construction": "W16",
+"params": ["M_{a}","b"],
+"props": [[["inc", "M_{a}","M_{c}M_{a}"], ["GD01"]]],
+"ndg": [], "det": [],
+"lemmas": ["GD01"],
+"intriangle": ["line", ["M_{c}","M_{a}"]]},
+
+{"type": "point", "name": "M_{c}", "construction": "W03",
+"params": ["M_{c}M_{a}","m(AH_{b})"],
+"props": [[["inc", "M_{c}","m(AH_{b})"], ["GL01","L41","GD02"]],[["inc", "M_{c}","M_{c}M_{a}"], ["GD01"]]],
+"ndg": [["not_parallel", "M_{c}M_{a}","m(AH_{b})"] ], "det": [["not_eq_line", "M_{c}M_{a}","m(AH_{b})"] ],
+"lemmas": ["GD01","GL01","L41","GD02"],
+"intriangle": ["midpoint", ["A","B"]]},
+
+{"type": "point", "name": "B", "construction": "W01",
+"params": ["M_{c}","M_{c}","A", -1, 1],
+"props": [[["sratio", "B","M_{c}","A","-1","1"], ["GL04","GL03","D20"]]],
+"ndg": [], "det": [],
+"lemmas": ["GL04","GL03","D20"],
+"intriangle": ["vertex", ["B"]]},
+
+{"type": "point", "name": "C", "construction": "W01",
+"params": ["G","G","M_{c}", -2, 1],
+"props": [[["sratio", "C","G","M_{c}","-2","1"], ["GL04","GL03","L57"]]],
+"ndg": [], "det": [],
+"lemmas": ["GL04","GL03","L57"],
+"intriangle": ["vertex", ["C"]]}
+];
