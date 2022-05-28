@@ -5,7 +5,11 @@ class Hints {
     constructor(solution, userConstruction, view, element) {
         this._solution = solution;
         this._user_construction = userConstruction;
-        this._given = this._solution.constructedVertices().map(name => { return {name: name, describe: false}; });
+        const cv = this._solution.constructedVertices();
+        this._given = cv.map(name => {
+            return {name: name, describe: false};
+        });
+        this._constructed = [...this._solution.givenObjects()];
         this._objects = new Construction();
         this._objects.setView(view);
         this._element = element;
@@ -44,7 +48,7 @@ class Hints {
         let desc = "";
         desc += capitalize(this._solution.describeStep(name)) + ".<br>";
 
-        const notConstructed = this.getHints(name).filter(name => !this._user_construction.includes(name));
+        const notConstructed = this.getHints(name).filter(name => !this._constructed.includes(name));
         if (notConstructed.length > 0)
             desc += "Try to construct " +
                     notConstructed.map(name => this._solution.describeObject(name)).join(" and ") + ".";
@@ -60,7 +64,7 @@ class Hints {
         h3.innerHTML = "Hints";
         this._element.append(h3);
         const p = document.createElement("p");
-        const cv = this._solution.constructedVertices().filter(name => !this._user_construction.includes(name)).map(name => laTeX2HTML(name));
+        const cv = this._solution.constructedVertices().filter(name => !this._constructed.includes(name)).map(name => laTeX2HTML(name));
         if (cv.length > 0)
             p.innerHTML = "All triangle vertices need to be constructed. You must construct " + cv.join(" and ") + ".";
         else {
@@ -73,7 +77,7 @@ class Hints {
         this._element.append(p);
 
         this._given.forEach((hint, i) => {
-            if (!this._user_construction.includes(hint.name)) {
+            if (!this._constructed.includes(hint.name)) {
                 const p = document.createElement("p");
                 this._element.append(p);
 
@@ -103,7 +107,8 @@ class Hints {
                     } else {
                         const hints = self.getHints(hint.name);
                         hints.forEach(name => {
-                            if (!self._given.map(hint => hint.name).includes(name) && !self._user_construction.includes(name))
+                            if (!self._given.map(hint => hint.name).includes(name) &&
+                                !self._constructed.includes(name))
                                 self._given.push({name:name, describe: false});
                         });
                     }
@@ -135,6 +140,7 @@ class Hints {
     }
 
     remove(name) {
+        this._constructed.push(name);
         this._given = this._given.filter(hint => hint.name != name);
         this.removeDeprecated();
         this._objects.removeObject(this._objects.find(name));

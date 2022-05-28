@@ -1,4 +1,3 @@
-"construction" =
 [
 {"type": "point", "name": "A", "construction": "free", "params": [80, 95], "color": "red", "intriangle": ["vertex", ["A"]]},
 {"type": "point", "name": "G", "construction": "free", "params": [70, 58.33], "color": "red", "intriangle": ["centroid", ["A","B","C"]]},
@@ -45,4 +44,4 @@
 "ndg": [], "det": [],
 "lemmas": ["GL03","D20"],
 "intriangle": ["vertex", ["B"]]}
-];
+]

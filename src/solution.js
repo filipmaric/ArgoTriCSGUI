@@ -21,7 +21,7 @@ const W = {
     W10b: (A, l) => RC.drop_perp(l, A),
     W11: RC.touching_circle,
     W12: RC.tangents,
-    W13: (c, A, O, t) => other_tangent(A, c, t),
+    W13: (c, A, O, t) => RC.other_tangent(A, c, t),
     W14: RC.bisector,
     W15: RC.homothety_line,
     W16: (A, l) => RC.parallel(l, A),
@@ -41,7 +41,7 @@ class Solution {
         this._construction = new Construction();
         
         // load solution from JSON
-        this.loadFromJSON(solutionJSON)
+        this.loadFromJSON(solutionJSON);
         
         // detecting analogous constructions is usefull for giving hints
         this.detectAnalogousConstructions();
@@ -74,7 +74,7 @@ class Solution {
         JSON.forEach(step => {
             const obj = W[step.construction](...step.params.map(name => name in this._solution ? this._solution[name]["object"] : name));
             var self = this;
-            function addObject(obj, name, step) {
+            function addObject(obj, name, intriangle, step) {
                 obj.label(name);
                 if ("color" in step)
                     obj.color(step.color);
@@ -83,6 +83,7 @@ class Solution {
                 // set unique name in the step
                 let step_copy = {...step};
                 step_copy.name = name;
+                step_copy.intriangle = intriangle;
                 self._solution[name] = {
                     "object": obj,
                     "step": step_copy
@@ -91,12 +92,12 @@ class Solution {
             }
 
             if (typeof step.name === "string")
-                addObject(obj, step.name, step);
+                addObject(obj, step.name, step.intriangle, step);
             else if (step.name.length == 1)
-                addObject(obj, step.name[0], step);
+                addObject(obj, step.name[0], step.intriangle[0], step);
             else if (step.name.length == 2) {
-                addObject(obj[0], step.name[0], step);
-                addObject(obj[1], step.name[1], step);
+                addObject(obj[0], step.name[0], step.intriangle[0], step);
+                addObject(obj[1], step.name[1], step.intriangle[1], step);
             }
         });
         DG.setConstruction(origConstruction);
@@ -226,6 +227,7 @@ class Solution {
         return intriangle + " " + laTeX2HTML(step.name);
     }
 
+    // FIXME: DRY - descriptions already exist in rc.js
     describeStep(name) {
         const step = this.step(name);
         if (step.construction == "W01") {
@@ -256,6 +258,11 @@ class Solution {
         } else if (step.construction == "W03") {
             return this.describeObject(name) +
                    " is the intersection of " +
+                   this.describeObject(step.params[0])  +
+                   " and " +
+                   this.describeObject(step.params[1]);
+        } else if (step.construction == "W04") {
+            return this.describeObject(name) + " is one of the intersections of " + 
                    this.describeObject(step.params[0])  +
                    " and " +
                    this.describeObject(step.params[1]);

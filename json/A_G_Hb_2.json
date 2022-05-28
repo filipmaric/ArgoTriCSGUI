@@ -1,8 +1,14 @@
-"construction" =
 [
 {"type": "point", "name": "A", "construction": "free", "params": [80, 95], "color": "red", "intriangle": ["vertex", ["A"]]},
-{"type": "point", "name": "M_{a}", "construction": "free", "params": [65, 40], "color": "red", "intriangle": ["midpoint", ["B","C"]]},
+{"type": "point", "name": "G", "construction": "free", "params": [70, 58.33], "color": "red", "intriangle": ["centroid", ["A","B","C"]]},
 {"type": "point", "name": "H_{b}", "construction": "free", "params": [89.36, 77.83], "color": "red", "intriangle": ["foot", ["B","A","C"]]},
+
+{"type": "point", "name": "M_{a}", "construction": "W01",
+"params": ["A","A","G", 3, 2],
+"props": [[["sratio", "M_{a}","A","G","3","2"], ["GL03","L55"]]],
+"ndg": [], "det": [],
+"lemmas": ["GL03","L55"],
+"intriangle": ["midpoint", ["B","C"]]},
 
 {"type": "circle", "name": "k(M_{a},B)", "construction": "W06",
 "params": ["H_{b}","M_{a}"],
@@ -32,10 +38,17 @@
 "lemmas": ["L38","GD02","D6","D9"],
 "intriangle": ["vertex", ["B"]]},
 
-{"type": "point", "name": "C", "construction": "W01",
-"params": ["M_{a}","M_{a}","B", -1, 1],
-"props": [[["sratio", "C","M_{a}","B","-1","1"], ["GL04","GL03","D21"]]],
+{"type": "point", "name": "M_{b}", "construction": "W01",
+"params": ["G","G","B", -1, 2],
+"props": [[["sratio", "M_{b}","G","B","-1","2"], ["GL04","GL03","L56"]]],
 "ndg": [], "det": [],
-"lemmas": ["GL04","GL03","D21"],
+"lemmas": ["GL04","GL03","L56"],
+"intriangle": ["midpoint", ["A","C"]]},
+
+{"type": "point", "name": "C", "construction": "W01",
+"params": ["A","A","M_{b}", 2, 1],
+"props": [[["sratio", "C","A","M_{b}","2","1"], ["GL03","GL04","D22"]]],
+"ndg": [], "det": [],
+"lemmas": ["GL03","GL04","D22"],
 "intriangle": ["vertex", ["C"]]}
-];
+]

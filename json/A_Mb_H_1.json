@@ -1,4 +1,3 @@
-"construction" =
 [
 {"type": "point", "name": "A", "construction": "free", "params": [80, 95], "color": "red", "intriangle": ["vertex", ["A"]]},
 {"type": "point", "name": "M_{b}", "construction": "free", "params": [95, 67.5], "color": "red", "intriangle": ["midpoint", ["A","C"]]},
@@ -66,4 +65,4 @@
 "ndg": [["not_parallel", "a","c"] ], "det": [["not_eq_line", "a","c"] ],
 "lemmas": ["GD01"],
 "intriangle": ["vertex", ["B"]]}
-];
+]

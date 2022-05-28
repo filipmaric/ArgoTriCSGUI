@@ -1,8 +1,7 @@
-"construction" =
 [
 {"type": "point", "name": "A", "construction": "free", "params": [80, 95], "color": "red", "intriangle": ["vertex", ["A"]]},
-{"type": "point", "name": "M_{a}", "construction": "free", "params": [65, 40], "color": "red", "intriangle": ["midpoint", ["B","C"]]},
 {"type": "point", "name": "M_{b}", "construction": "free", "params": [95, 67.5], "color": "red", "intriangle": ["midpoint", ["A","C"]]},
+{"type": "point", "name": "M_{c}", "construction": "free", "params": [50, 67.5], "color": "red", "intriangle": ["midpoint", ["A","B"]]},
 
 {"type": "point", "name": "C", "construction": "W01",
 "params": ["A","A","M_{b}", 2, 1],
@@ -12,9 +11,9 @@
 "intriangle": ["vertex", ["C"]]},
 
 {"type": "point", "name": "B", "construction": "W01",
-"params": ["M_{a}","M_{a}","C", -1, 1],
-"props": [[["sratio", "B","M_{a}","C","-1","1"], ["GL04","GL03","D21"]]],
+"params": ["A","A","M_{c}", 2, 1],
+"props": [[["sratio", "B","A","M_{c}","2","1"], ["GL03","D20"]]],
 "ndg": [], "det": [],
-"lemmas": ["GL04","GL03","D21"],
+"lemmas": ["GL03","D20"],
 "intriangle": ["vertex", ["B"]]}
-];
+]

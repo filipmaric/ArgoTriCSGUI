@@ -44,7 +44,7 @@ function setup(solutionJSON) {
 
     // hide all constructed elements (show only elements that are initially given)
     solution.hideConstructed();
-    
+
     function constructionCallback(obj) {
         userConstruction.addObject(obj);
         
@@ -53,11 +53,14 @@ function setup(solutionJSON) {
                 const name = knownObject.label();
                 obj.label(name);
                 obj.color(knownObject.color() ? knownObject.color() : "green");
-                hints.remove(name);
+                if (removeHints)
+                    hints.remove(name);
             }
         }
 
+        let removeHints = true;
         solution.forEach(check);
+        removeHints = false;
         allTriangleElements.forEach(check);
     }
     
@@ -73,10 +76,14 @@ function animate(solutionJSON) {
     const solution = new Solution(solutionJSON);
 
     const construction = solution.construction();
-    
+
     // attach construction to the global view
     DG.setConstruction(construction);
-    
+
+    const vertices = solution.allVertices().map(name => solution.object(name));
+    for (let i = 0; i < vertices.length; i++)
+        DG.segment(vertices[i], vertices[(i+1) % vertices.length]).width(3);
+
     var animButtons = new AnimationButtons(construction, DG.container());
 }
 

@@ -1,4 +1,3 @@
-"construction" =
 [
 {"type": "point", "name": "A", "construction": "free", "params": [80, 95], "color": "red", "intriangle": ["vertex", ["A"]]},
 {"type": "point", "name": "B", "construction": "free", "params": [20, 40], "color": "red", "intriangle": ["vertex", ["B"]]},
@@ -45,4 +44,4 @@
 "ndg": [["intersect_line_circle", "h_{c}","k(M_{a},B)"] ], "det": [["not_eq_point", "H_{c}","C"] ],
 "lemmas": ["GD02","L39","L37","D7","D10"],
 "intriangle": ["vertex", ["C"]]}
-];
+]

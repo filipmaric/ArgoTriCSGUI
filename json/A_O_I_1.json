@@ -1,4 +1,3 @@
-"construction" =
 [
 {"type": "point", "name": "A", "construction": "free", "params": [80, 95], "color": "red", "intriangle": ["vertex", ["A"]]},
 {"type": "point", "name": "O", "construction": "free", "params": [65, 51.14], "color": "red", "intriangle": ["circumcenter", ["A","B","C"]]},
@@ -38,4 +37,4 @@
 "ndg": [["intersect_circle_circle", "k(O,C)","k(N_{a},C)"] ], "det": [["not_eq_circle", "k(O,C)","k(N_{a},C)"] ],
 "lemmas": ["D26","L12","GD02","L31"],
 "intriangle": [ ["vertex", ["C"]], ["vertex", ["B"]] ]}
-];
+]
